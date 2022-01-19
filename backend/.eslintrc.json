@@ -32,6 +32,13 @@
       "error",
       "always"
     ],
-    "eol-last": "error"
+    "eol-last": "error",
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 2,
+        "maxEOF": 0
+      }
+    ]
   }
 }

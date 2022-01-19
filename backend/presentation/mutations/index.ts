@@ -1,18 +1,10 @@
 import { GraphQLObjectType } from 'graphql';
-import { CreateUserType, UserType } from '../types';
+import { createUserMutation } from './user';
 
 export const mutation = new GraphQLObjectType({
   name: 'mutation',
+  description: 'Kanban Application Schema Mutation Root',
   fields: {
-    addUser: {
-      type: UserType,
-      args: {
-        data: { type: CreateUserType },
-      },
-      resolve: (source, args) => {
-        console.log('resolve', { source, args });
-        return null;
-      },
-    },
+    addUser: createUserMutation,
   },
 });
