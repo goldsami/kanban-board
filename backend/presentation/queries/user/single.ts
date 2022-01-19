@@ -1,3 +1,4 @@
+import { getUserUseCase } from '../../../domain';
 import { GraphQLNonNull, GraphQLString } from 'graphql';
 import { UserType } from '../../types';
 
@@ -7,9 +8,7 @@ export const userQuery = {
     id: { type: new GraphQLNonNull(GraphQLString) }
   },
   description: 'Single User',
-  resolve(args) {
-    console.log('single user query', args);
-
-    return null;
+  resolve(_, { id }) {
+    return getUserUseCase(id);
   },
 };

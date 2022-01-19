@@ -1,3 +1,4 @@
+import { createUserUseCase } from '../../../domain';
 import { CreateUserType, UserType } from '../../types';
 
 export const createUserMutation = {
@@ -5,8 +6,8 @@ export const createUserMutation = {
   args: {
     data: { type: CreateUserType },
   },
-  resolve: (args) => {
-    console.log('resolve', { args });
-    return null;
+  resolve: (_, { data }) => {
+
+    return createUserUseCase(data);
   },
 };
