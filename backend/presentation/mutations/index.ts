@@ -1,5 +1,5 @@
-import { GraphQLObjectType } from "graphql";
-import { CreateUserType, UserType } from "../types";
+import { GraphQLObjectType } from 'graphql';
+import { CreateUserType, UserType } from '../types';
 
 export const mutation = new GraphQLObjectType({
   name: 'mutation',
@@ -11,7 +11,7 @@ export const mutation = new GraphQLObjectType({
       },
       resolve: (source, args) => {
         console.log('resolve', { source, args });
-        return null
+        return null;
       },
     },
   },
