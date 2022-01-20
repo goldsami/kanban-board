@@ -39,6 +39,7 @@
         "max": 2,
         "maxEOF": 0
       }
-    ]
+    ],
+    "@typescript-eslint/no-empty-interface": "off"
   }
 }
