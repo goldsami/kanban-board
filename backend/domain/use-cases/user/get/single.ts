@@ -1,7 +1,7 @@
+import { userRepository } from '../../../../domain';
 import { User } from '../../../models';
 
 export function getUserUseCase(id: string): Promise<User> {
   console.log('get user use case', id);
-
-  return Promise.resolve({ id: 'one', name: 'nm' });
+  return userRepository.get(id);
 }
