@@ -1,6 +1,5 @@
 import { injectable } from 'inversify';
-import { User } from '../../../domain';
-import { UserRepository } from '../../repositories';
+import { User, UserRepository } from '../../domain';
 
 @injectable()
 export class UserAdapter implements UserRepository {

@@ -1,4 +1,4 @@
-import { UserRepository } from '../../data';
+import { UserRepository } from '../repositories';
 import { myContainer, TYPES } from '../../di';
 
 const userRepository = myContainer.get<UserRepository>(TYPES.UserRepository);
