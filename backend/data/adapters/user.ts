@@ -1,15 +1,19 @@
-import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getFirestore, updateDoc } from 'firebase/firestore';
 import { injectable } from 'inversify';
 import { User, UserRepository } from '../../domain';
+import { FirebaseService } from '../firebase.service';
 
 @injectable()
 export class UserAdapter implements UserRepository {
+  private firebaseService: FirebaseService;
+  constructor() {
+    this.firebaseService = new FirebaseService();
+  }
   get(id: string): Promise<User> {
     return Promise.resolve({ id, name: 'some name' });
   }
   async getList(): Promise<User[]> {
-    const db = getFirestore();
-    const querySnapshot = await getDocs(collection(db, 'users'));
+    const querySnapshot = await this.firebaseService.getList();
     querySnapshot.forEach((doc) => {
       console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
     });
