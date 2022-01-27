@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs, getFirestore } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, updateDoc } from 'firebase/firestore';
 import { injectable } from 'inversify';
 import { User, UserRepository } from '../../domain';
 
@@ -15,11 +15,21 @@ export class UserAdapter implements UserRepository {
     });
     return [];
   }
-  delete(id: string): Promise<User> {
-    throw new Error('Method not implemented.');
+  async delete(id: string): Promise<User> {
+    const db = getFirestore();
+    deleteDoc(doc(db, 'users', id));
+    return null;
   }
-  update(id: string, data: Partial<User>): Promise<User> {
-    throw new Error('Method not implemented.');
+  async update(id: string, data: Partial<User>): Promise<User> {
+    const db = getFirestore();
+    const docRef = doc(db, 'users', id);
+
+    // Update the timestamp field with the value from the server
+    const updateTimestamp = await updateDoc(docRef, {
+      name: data.name
+    });
+
+    return null;
   }
   async create(data: Partial<User>): Promise<User> {
     const db = getFirestore();
