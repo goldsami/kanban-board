@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { addDoc, collection, deleteDoc, doc, DocumentData, DocumentSnapshot, Firestore, getDoc, getDocs, getFirestore } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, DocumentData, DocumentSnapshot, Firestore, getDoc, getDocs, getFirestore, updateDoc } from 'firebase/firestore';
 import { FIREBASE_CONFIG } from './config/firebase';
 
 
@@ -32,10 +32,15 @@ export class FirebaseService {
   }
 
   async create(data: Record<string, unknown>, table = this.tableName): Promise<DocumentData> {
-    const docRef = await addDoc(collection(this.db, 'users'), {
+    const docRef = await addDoc(collection(this.db, table), {
       ...data,
     });
     return { id: docRef.id, ...data };
+  }
+
+  async update(id: string, data: Record<string, unknown>, table = this.tableName): Promise<void> {
+    const docRef = doc(this.db, table, id);
+    return updateDoc(docRef, { ...data });
   }
 
   private toDocumentData(snapshot: DocumentSnapshot<DocumentData>): DocumentData {

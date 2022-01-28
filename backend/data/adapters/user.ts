@@ -1,4 +1,3 @@
-import { addDoc, collection, doc, getFirestore, updateDoc } from 'firebase/firestore';
 import { injectable } from 'inversify';
 import { User, UserRepository } from '../../domain';
 import { FirebaseService, TABLE_NAMES } from '../firebase.service';
@@ -27,15 +26,10 @@ export class UserAdapter implements UserRepository {
   }
 
   async update(id: string, data: Partial<User>): Promise<User> {
-    const db = getFirestore();
-    const docRef = doc(db, 'users', id);
+    const user = await this.get(id);
+    await this.firebaseService.update(id, data);
 
-    // Update the timestamp field with the value from the server
-    const updateTimestamp = await updateDoc(docRef, {
-      name: data.name
-    });
-
-    return null;
+    return { id, ...user, ...data } as User;
   }
 
   async create(data: Partial<User>): Promise<User> {
