@@ -39,16 +39,7 @@ export class UserAdapter implements UserRepository {
   }
 
   async create(data: Partial<User>): Promise<User> {
-    const db = getFirestore();
-    try {
-      const docRef = await addDoc(collection(db, 'users'), {
-        name: data.name,
-      });
-      console.log('Document written with ID: ', docRef.id);
-    } catch (e) {
-      console.error('Error adding document: ', e);
-    }
-    return Promise.resolve({ id: 'new user', name: 'new usr name' });
+    return (await this.firebaseService.create(data)) as User;
   }
 
 }
