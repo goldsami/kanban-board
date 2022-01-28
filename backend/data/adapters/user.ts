@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, getFirestore, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, doc, getFirestore, updateDoc } from 'firebase/firestore';
 import { injectable } from 'inversify';
 import { User, UserRepository } from '../../domain';
 import { FirebaseService, TABLE_NAMES } from '../firebase.service';
@@ -6,21 +6,26 @@ import { FirebaseService, TABLE_NAMES } from '../firebase.service';
 @injectable()
 export class UserAdapter implements UserRepository {
   private firebaseService: FirebaseService;
+
   constructor() {
     this.firebaseService = new FirebaseService(TABLE_NAMES.USERS);
   }
+
   async get(id: string): Promise<User> {
     const res = await this.firebaseService.get(id);
     return { ...res } as User;
   }
+
   async getList(): Promise<User[]> {
     return (await this.firebaseService.getList()).map(x => ({ ...x } as User));
   }
+
   async delete(id: string): Promise<User> {
-    const db = getFirestore();
-    deleteDoc(doc(db, 'users', id));
-    return null;
+    const user = await this.get(id);
+    await this.firebaseService.delete(id);
+    return user;
   }
+
   async update(id: string, data: Partial<User>): Promise<User> {
     const db = getFirestore();
     const docRef = doc(db, 'users', id);
@@ -32,6 +37,7 @@ export class UserAdapter implements UserRepository {
 
     return null;
   }
+
   async create(data: Partial<User>): Promise<User> {
     const db = getFirestore();
     try {
