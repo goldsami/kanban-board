@@ -7,13 +7,14 @@ import { FirebaseService, TABLE_NAMES } from '../firebase.service';
 export class UserAdapter implements UserRepository {
   private firebaseService: FirebaseService;
   constructor() {
-    this.firebaseService = new FirebaseService();
+    this.firebaseService = new FirebaseService(TABLE_NAMES.USERS);
   }
-  get(id: string): Promise<User> {
-    return Promise.resolve({ id, name: 'some name' });
+  async get(id: string): Promise<User> {
+    const res = await this.firebaseService.get(id);
+    return { ...res } as User;
   }
   async getList(): Promise<User[]> {
-    return (await this.firebaseService.getList(TABLE_NAMES.USERS)).map(x => ({ ...x } as User));
+    return (await this.firebaseService.getList()).map(x => ({ ...x } as User));
   }
   async delete(id: string): Promise<User> {
     const db = getFirestore();
