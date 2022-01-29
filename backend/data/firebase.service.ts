@@ -5,6 +5,8 @@ import { FIREBASE_CONFIG } from './config/firebase';
 
 export enum TABLE_NAMES {
   USERS = 'users',
+  TASKS = 'tasks',
+  PROJECTS = 'projects',
 }
 
 export class FirebaseService {
