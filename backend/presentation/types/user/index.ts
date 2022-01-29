@@ -1,4 +1,6 @@
-import { GraphQLNonNull, GraphQLObjectType, GraphQLString } from 'graphql';
+import { getProjectsUseCase } from '../../../domain';
+import { GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLString } from 'graphql';
+import { ProjectType } from '..';
 
 export const UserType = new GraphQLObjectType({
   name: 'UserType',
@@ -6,6 +8,11 @@ export const UserType = new GraphQLObjectType({
   fields: () => ({
     id: { type: new GraphQLNonNull(GraphQLString) },
     name: { type: new GraphQLNonNull(GraphQLString) },
+    projects: {
+      type: new GraphQLList(ProjectType), resolve: ({ id }) => {
+        return getProjectsUseCase(id);
+      }
+    },
   }),
 });
 
