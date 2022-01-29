@@ -4,5 +4,6 @@ export const CreateTaskType = new GraphQLInputObjectType({
   name: 'CreateTaskType',
   fields: {
     name: { type: GraphQLString },
+    projectId: { type: GraphQLString },
   },
 });

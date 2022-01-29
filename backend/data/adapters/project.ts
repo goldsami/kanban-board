@@ -1,3 +1,4 @@
+import { where } from 'firebase/firestore';
 import { injectable } from 'inversify';
 import { Project, ProjectRepository } from '../../domain';
 import { FirebaseService, TABLE_NAMES } from '../firebase.service';
@@ -15,8 +16,8 @@ export class ProjectAdapter implements ProjectRepository {
     return { ...res } as Project;
   }
 
-  async getList(): Promise<Project[]> {
-    return (await this.firebaseService.getList()).map(x => ({ ...x } as Project));
+  async getList(userId: string): Promise<Project[]> {
+    return (await this.firebaseService.getList(where('userId', '==', userId))).map(x => ({ ...x } as Project));
   }
 
   async delete(id: string): Promise<Project> {

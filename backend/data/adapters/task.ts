@@ -1,3 +1,4 @@
+import { where } from 'firebase/firestore';
 import { injectable } from 'inversify';
 import { Task, TaskRepository } from '../../domain';
 import { FirebaseService, TABLE_NAMES } from '../firebase.service';
@@ -15,8 +16,8 @@ export class TaskAdapter implements TaskRepository {
     return { ...res } as Task;
   }
 
-  async getList(): Promise<Task[]> {
-    return (await this.firebaseService.getList()).map(x => ({ ...x } as Task));
+  async getList(projectId: string): Promise<Task[]> {
+    return (await this.firebaseService.getList(where('projectId', '==', projectId))).map(x => ({ ...x } as Task));
   }
 
   async delete(id: string): Promise<Task> {

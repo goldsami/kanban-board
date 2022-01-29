@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { addDoc, collection, deleteDoc, doc, DocumentData, DocumentSnapshot, Firestore, getDoc, getDocs, getFirestore, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, DocumentData, DocumentSnapshot, Firestore, getDoc, getDocs, getFirestore, query, QueryConstraint, updateDoc } from 'firebase/firestore';
 import { FIREBASE_CONFIG } from './config/firebase';
 
 
@@ -19,29 +19,30 @@ export class FirebaseService {
     this.tableName = tableName;
   }
 
-  async getList(table = this.tableName): Promise<DocumentData[]> {
-    return (await getDocs(collection(this.db, table))).docs.map(this.toDocumentData);
+  async getList(where?: QueryConstraint): Promise<DocumentData[]> {
+    const q = where ? query(collection(this.db, this.tableName), where) : query(collection(this.db, this.tableName));
+    return (await getDocs(q)).docs.map(this.toDocumentData);
   }
 
-  async get(id: string, table = this.tableName): Promise<DocumentData> {
-    const res = await getDoc(doc(this.db, table, id));
+  async get(id: string): Promise<DocumentData> {
+    const res = await getDoc(doc(this.db, this.tableName, id));
 
     return this.toDocumentData(res);
   }
 
-  delete(id: string, table = this.tableName): Promise<void> {
-    return deleteDoc(doc(this.db, table, id));
+  delete(id: string): Promise<void> {
+    return deleteDoc(doc(this.db, this.tableName, id));
   }
 
-  async create(data: Record<string, unknown>, table = this.tableName): Promise<DocumentData> {
-    const docRef = await addDoc(collection(this.db, table), {
+  async create(data: Record<string, unknown>,): Promise<DocumentData> {
+    const docRef = await addDoc(collection(this.db, this.tableName), {
       ...data,
     });
     return { id: docRef.id, ...data };
   }
 
-  async update(id: string, data: Record<string, unknown>, table = this.tableName): Promise<void> {
-    const docRef = doc(this.db, table, id);
+  async update(id: string, data: Record<string, unknown>): Promise<void> {
+    const docRef = doc(this.db, this.tableName, id);
     return updateDoc(docRef, { ...data });
   }
 

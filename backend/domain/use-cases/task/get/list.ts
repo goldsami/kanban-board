@@ -1,6 +1,6 @@
 import { Task } from '../../../models';
 import { taskRepository } from '../../../../domain';
 
-export function getTasksUseCase(): Promise<Task[]> {
-  return taskRepository.getList();
+export function getTasksUseCase(projectId: string): Promise<Task[]> {
+  return taskRepository.getList(projectId);
 }
