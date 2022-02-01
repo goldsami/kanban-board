@@ -56,6 +56,7 @@ export default {
 					...config().parsed // attached the .env config
 				}
 			}),
+			preventAssignment: true,
 		}),
 		// we'll extract any component CSS out into
 		// a separate file - better for performance

@@ -1,8 +1,7 @@
-<script lang="ts">
+<script>
 	import Q from "./components/Q.svelte";
 	import Auth from "./components/Auth.svelte";
-	let __myapp;
-	export let name: string;
+	export let name;
 
 	import { initializeApp } from "firebase/app";
 

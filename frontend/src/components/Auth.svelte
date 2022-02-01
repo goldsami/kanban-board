@@ -1,5 +1,9 @@
 <script>
-  import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+  import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+  } from "firebase/auth";
 
   const auth = getAuth();
   function createUser() {
@@ -16,8 +20,23 @@
         // ..
       });
   }
+
+  async function login() {
+    signInWithEmailAndPassword(auth, "email@gmail.com", "password")
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        user.getIdToken().then(console.log);
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+  }
 </script>
 
 <div>
   <button on:click={createUser}>Create</button>
+  <button on:click={login}>Login</button>
 </div>
