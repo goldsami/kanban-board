@@ -5,7 +5,9 @@ import { UserType } from '../../types';
 export const usersQuery = {
   type: new GraphQLList(UserType),
   description: 'List of all Users',
-  resolve() {
+  resolve(obj, args, context) {
+    console.log('get', context);
+
     return getUsersUseCase();
   },
 };
