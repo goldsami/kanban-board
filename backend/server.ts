@@ -2,9 +2,16 @@ import express from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import { Schema } from './presentation';
 import cors from 'cors';
-import { getAuth } from 'firebase/auth';
+// import { defalult as serviceAccount } from 'firebase/kanban-board-175b9-firebase-adminsdk-m9m5x-ef3afb6c6a.json';
+import config from './firebase/config.json';
 
 async function start() {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const admin = require('firebase-admin');
+
+  admin.initializeApp({
+    credential: admin.credential.cert(config),
+  });
   try {
     const port = process.env.PORT || 3000;
     const app = express();
@@ -12,16 +19,19 @@ async function start() {
       origin: process.env.BACKEND_URL || ''
     }));
     app.use((req, res, next) => {
+
       if (req.headers.authorization) {
         const tokenParts = req.headers.authorization
           .split(' ')[1];
         // console.log('token:', tokenParts);
-        // getAuth().verifyIdToken(tokenParts)
+        admin.auth().verifyIdToken(tokenParts).then(x => console.log('userId:', x.user_id)).catch(() => {
+          throw '401';
+        });
       }
-      // else return 401;
+      else throw '401';
       next();
     });
-    app.use('/', (req, res) => {
+    app.use('/graphql', (req, res) => {
       graphqlHTTP({
         schema: Schema,
         graphiql: true,
