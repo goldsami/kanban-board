@@ -24,12 +24,14 @@ async function start() {
         const tokenParts = req.headers.authorization
           .split(' ')[1];
         // console.log('token:', tokenParts);
-        admin.auth().verifyIdToken(tokenParts).then(x => console.log('userId:', x.user_id)).catch(() => {
+        admin.auth().verifyIdToken(tokenParts).then(x => {
+          res.locals.userId = x.user_id;
+          next();
+        }).catch(() => {
           throw '401';
         });
       }
       else throw '401';
-      next();
     });
     app.use('/graphql', (req, res) => {
       graphqlHTTP({
@@ -37,7 +39,7 @@ async function start() {
         graphiql: true,
         context: {
           user: {
-            name: ''
+            id: res.locals.userId
           }
         }
       })(req, res);
