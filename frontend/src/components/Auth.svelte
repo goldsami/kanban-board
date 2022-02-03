@@ -1,38 +1,15 @@
 <script>
-  import {
-    getAuth,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-  } from "firebase/auth";
+  import axios from "axios";
 
-  const auth = getAuth();
-  function createUser() {
-    createUserWithEmailAndPassword(auth, "email@gmail.com", "password")
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log("user", { user: user.email, tok: user.getIdToken() });
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
-      });
-  }
+  function createUser(email = "email@gmail.com", password = "password") {}
 
-  async function login() {
-    signInWithEmailAndPassword(auth, "email@gmail.com", "password")
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        user.getIdToken().then(console.log);
-        // ...
+  function login(email = "email@gmail.com", password = "password") {
+    axios
+      .post("http://localhost:3000/login", {
+        email,
+        password,
       })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-      });
+      .then((x) => console.log("login:", x));
   }
 </script>
 
