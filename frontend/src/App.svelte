@@ -1,6 +1,6 @@
 <script>
-	import Q from "./components/Q.svelte";
-	import Auth from "./components/Auth.svelte";
+	import Q from './components/Q.svelte';
+	import Auth from './components/Auth.svelte';
 	export let name;
 </script>
 

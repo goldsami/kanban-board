@@ -1,24 +1,24 @@
 <script>
-  import axios from "axios";
+  import axios from 'axios';
 
-  function createUser(email = "email11@gmail1.com", password = "password") {
-    console.log("create user");
+  function createUser(email = 'email11@gmail1.com', password = 'password') {
+    console.log('create user');
     axios
-      .post("http://localhost:3000/sign-up", {
+      .post('http://localhost:3000/sign-up', {
         email,
         password,
       })
-      .then((x) => console.log("sing-up:", x));
+      .then((x) => console.log('sing-up:', x));
   }
 
-  function login(email = "email@gmail.com", password = "password") {
-    console.log("login");
+  function login(email = 'email@gmail.com', password = 'password') {
+    console.log('login');
     axios
-      .post("http://localhost:3000/login", {
+      .post('http://localhost:3000/login', {
         email,
         password,
       })
-      .then((x) => console.log("login:", x));
+      .then((x) => console.log('login:', x));
   }
 </script>
 
