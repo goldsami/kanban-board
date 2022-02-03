@@ -51,7 +51,7 @@ async function start() {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          user.getIdToken().then(token => {
+          user.getIdToken(true).then(token => {
             res.send(token);
           });
           // ...
@@ -61,6 +61,29 @@ async function start() {
 
           const errorCode = error.code;
           const errorMessage = error.message;
+          res.send(error);
+        });
+    });
+    app.post('/sign-up', express.json(), async (req, res) => {
+      const body = req.body;
+      console.log('body:', body);
+      const auth = getAuth();
+      createUserWithEmailAndPassword(auth, req.body.email, req.body.password)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          // ...
+          user.getIdToken().then((tok) => {
+            console.log('token:', tok);
+            res.send(tok);
+
+          });
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          res.send(error);
+          // ..
         });
     });
     app.use('/graphql', authMiddleware, (req, res) => {
