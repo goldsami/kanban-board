@@ -2,14 +2,8 @@ import express from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import { Schema } from './presentation';
 import cors from 'cors';
-// import { defalult as serviceAccount } from 'firebase/kanban-board-175b9-firebase-adminsdk-m9m5x-ef3afb6c6a.json';
 import config from './firebase/config.json';
-// import admin from 'firebase-admin';
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from 'firebase/auth';
+import { loginUseCase, signUpUseCase } from './domain';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const admin = require('firebase-admin');
@@ -44,47 +38,14 @@ async function start() {
       origin: process.env.BACKEND_URL || ''
     }));
     app.post('/login', express.json(), async (req, res) => {
-      const body = req.body;
-      console.log('body:', body);
-      const auth = getAuth();
-      signInWithEmailAndPassword(auth, req.body.email, req.body.password)
-        .then((userCredential) => {
-          // Signed in
-          const user = userCredential.user;
-          user.getIdToken(true).then(token => {
-            res.send(token);
-          });
-          // ...
-        })
-        .catch((error) => {
-          console.log('err', error.message);
-
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          res.send(error);
-        });
+      const { email, password } = req.body;
+      const token = await loginUseCase({ email, password });
+      res.send(token);
     });
     app.post('/sign-up', express.json(), async (req, res) => {
-      const body = req.body;
-      console.log('body:', body);
-      const auth = getAuth();
-      createUserWithEmailAndPassword(auth, req.body.email, req.body.password)
-        .then((userCredential) => {
-          // Signed in
-          const user = userCredential.user;
-          // ...
-          user.getIdToken().then((tok) => {
-            console.log('token:', tok);
-            res.send(tok);
-
-          });
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          res.send(error);
-          // ..
-        });
+      const { email, password } = req.body;
+      const token = await signUpUseCase({ email, password });
+      res.send(token);
     });
     app.use('/graphql', authMiddleware, (req, res) => {
       graphqlHTTP({
