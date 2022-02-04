@@ -1,6 +1,10 @@
-import { authRepository } from '..';
-import { AuthCredentials } from '../../models';
+import { authRepository, createUserUseCase } from '..';
+import { SignUpInputType } from '../../models';
 
-export function signUpUseCase(credentials: AuthCredentials, repository = authRepository): Promise<string> {
-  return repository.signUp(credentials);
+export async function signUpUseCase(credentials: SignUpInputType, repository = authRepository): Promise<string> {
+  const token = await repository.signUp(credentials);
+  await createUserUseCase({
+    name: credentials.name,
+  });
+  return token;
 }

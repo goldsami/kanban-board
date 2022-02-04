@@ -22,8 +22,8 @@ async function start() {
       res.send(token);
     });
     app.post('/sign-up', express.json(), async (req, res) => {
-      const { email, password } = req.body;
-      const token = await signUpUseCase({ email, password });
+      const { email, password, name } = req.body;
+      const token = await signUpUseCase({ email, password, name });
       res.send(token);
     });
     app.use('/graphql', authMiddleware, (req, res) => {
