@@ -2,35 +2,14 @@ import express from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import { Schema } from './presentation';
 import cors from 'cors';
-import config from './firebase/config.json';
-import { loginUseCase, signUpUseCase } from './domain';
+import { loginUseCase, signUpUseCase, verifyTokenUseCase } from './domain';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const admin = require('firebase-admin');
-
-const authMiddleware = (req, res, next) => {
-
-  if (req.headers.authorization) {
-    const tokenParts = req.headers.authorization
-      .split(' ')[1];
-    // console.log('token:', tokenParts);
-    admin.auth().verifyIdToken(tokenParts).then(x => {
-      res.locals.userId = x.user_id;
-      next();
-    }).catch((e) => {
-      console.log('err', e.message);
-      next();
-      // throw '401';
-    });
-  }
-  else throw '402';
+const authMiddleware = async (req, res, next) => {
+  res.locals.userId = await verifyTokenUseCase(req.headers.authorization.split(' ')[1]);
+  next();
 };
 
 async function start() {
-
-  admin.initializeApp({
-    credential: admin.credential.cert(config),
-  });
   try {
     const port = process.env.PORT || 3000;
     const app = express();
