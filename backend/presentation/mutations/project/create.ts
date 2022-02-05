@@ -6,8 +6,10 @@ export const createProjectMutation = {
   args: {
     data: { type: CreateProjectType },
   },
-  resolve: (_, { data }) => {
-
-    return createProjectUseCase(data);
+  resolve: (_, { data }, context) => {
+    return createProjectUseCase({
+      ...data,
+      userId: context.userId,
+    });
   },
 };

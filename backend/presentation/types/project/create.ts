@@ -4,6 +4,5 @@ export const CreateProjectType = new GraphQLInputObjectType({
   name: 'CreateProjectType',
   fields: {
     name: { type: GraphQLString },
-    userId: { type: GraphQLString },
   },
 });
