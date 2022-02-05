@@ -1,6 +1,7 @@
 import { authRepository } from '..';
 import { AuthCredentials } from '../../models';
 
-export function loginUseCase(credentials: AuthCredentials, repository = authRepository): Promise<string> {
-  return repository.login(credentials);
+export async function loginUseCase(credentials: AuthCredentials, repository = authRepository): Promise<string> {
+  const { token } = await repository.login(credentials);
+  return token;
 }

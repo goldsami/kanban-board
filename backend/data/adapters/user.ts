@@ -1,3 +1,4 @@
+import { where } from 'firebase/firestore';
 import { injectable } from 'inversify';
 import { User, UserRepository } from '../../domain';
 import { FirebaseService, TABLE_NAMES } from '../firebase.service';
@@ -11,8 +12,7 @@ export class UserAdapter implements UserRepository {
   }
 
   async get(id: string): Promise<User> {
-    const res = await this.firebaseService.get(id);
-    return { ...res } as User;
+    return (await this.firebaseService.getList(where('authId', '==', id))).map(x => ({ ...x } as User))[0];
   }
 
   async getList(): Promise<User[]> {

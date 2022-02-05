@@ -43,9 +43,7 @@ async function start() {
         schema: Schema,
         graphiql: true,
         context: {
-          user: {
-            id: res.locals.userId
-          }
+          userId: res.locals.userId
         }
       })(req, res);
     });
