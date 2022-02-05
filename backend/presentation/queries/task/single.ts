@@ -8,7 +8,7 @@ export const taskQuery = {
     id: { type: new GraphQLNonNull(GraphQLString) }
   },
   description: 'Single Task',
-  resolve(_, { id }) {
-    return getTaskUseCase(id);
+  resolve(_, { id }, context) {
+    return getTaskUseCase(id, context.userId);
   },
 };

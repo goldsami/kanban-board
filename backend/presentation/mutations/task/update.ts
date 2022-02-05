@@ -8,8 +8,8 @@ export const updateTaskMutation = {
     id: { type: new GraphQLNonNull(GraphQLString) },
     data: { type: CreateTaskType },
   },
-  resolve: (_, { id, data }) => {
+  resolve: (_, { id, data }, context) => {
 
-    return updateTaskUseCase(id, data);
+    return updateTaskUseCase(id, context.userId, data);
   },
 };

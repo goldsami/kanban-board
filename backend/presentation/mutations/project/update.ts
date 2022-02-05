@@ -8,8 +8,7 @@ export const updateProjectMutation = {
     id: { type: new GraphQLNonNull(GraphQLString) },
     data: { type: CreateProjectType },
   },
-  resolve: (_, { id, data }) => {
-
-    return updateProjectUseCase(id, data);
+  resolve: (_, { id, data }, context) => {
+    return updateProjectUseCase(id, data, context.userId);
   },
 };

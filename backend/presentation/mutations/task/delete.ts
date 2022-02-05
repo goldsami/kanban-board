@@ -7,8 +7,8 @@ export const deleteTaskMutation = {
   args: {
     id: { type: new GraphQLNonNull(GraphQLString) },
   },
-  resolve: (_, { id }) => {
+  resolve: (_, { id }, context) => {
 
-    return deleteTaskUseCase(id);
+    return deleteTaskUseCase(id, context.userId);
   },
 };

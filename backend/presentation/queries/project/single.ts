@@ -8,7 +8,7 @@ export const projectQuery = {
     id: { type: new GraphQLNonNull(GraphQLString) }
   },
   description: 'Single Project',
-  resolve(_, { id }) {
-    return getProjectUseCase(id);
+  resolve(_, { id }, context) {
+    return getProjectUseCase(id, context.userId);
   },
 };

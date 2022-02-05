@@ -1,6 +1,8 @@
 import { projectRepository } from '../../../../domain';
 import { Project } from '../../../models';
 
-export function getProjectUseCase(id: string, repository = projectRepository): Promise<Project> {
-  return repository.get(id);
+export async function getProjectUseCase(id: string, userId: string, repository = projectRepository): Promise<Project> {
+  const project = await repository.get(id);
+  if (project.userId !== userId) throw new Error('Item not found');
+  return project;
 }

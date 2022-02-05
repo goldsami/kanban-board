@@ -1,6 +1,8 @@
-import { taskRepository } from '../../../../domain';
+import { getProjectUseCase, taskRepository } from '../../../../domain';
 import { Task } from '../../../models';
 
-export function getTaskUseCase(id: string, repository = taskRepository): Promise<Task> {
-  return repository.get(id);
+export async function getTaskUseCase(id: string, userId: string, repository = taskRepository): Promise<Task> {
+  const task = await repository.get(id);
+  await getProjectUseCase(task.projectId, userId);
+  return task;
 }

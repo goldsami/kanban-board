@@ -6,8 +6,8 @@ export const createTaskMutation = {
   args: {
     data: { type: CreateTaskType },
   },
-  resolve: (_, { data }) => {
+  resolve: (_, { data }, context) => {
 
-    return createTaskUseCase(data);
+    return createTaskUseCase(data, context.userId);
   },
 };

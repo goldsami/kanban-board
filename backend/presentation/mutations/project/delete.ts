@@ -7,8 +7,7 @@ export const deleteProjectMutation = {
   args: {
     id: { type: new GraphQLNonNull(GraphQLString) },
   },
-  resolve: (_, { id }) => {
-
-    return deleteProjectUseCase(id);
+  resolve: (_, { id }, context) => {
+    return deleteProjectUseCase(id, context.userId);
   },
 };
