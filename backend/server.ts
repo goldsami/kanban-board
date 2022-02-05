@@ -5,8 +5,12 @@ import cors from 'cors';
 import { loginUseCase, signUpUseCase, verifyTokenUseCase } from './domain';
 
 const authMiddleware = async (req, res, next) => {
-  res.locals.userId = await verifyTokenUseCase(req.headers.authorization.split(' ')[1]);
-  next();
+  try {
+    res.locals.userId = await verifyTokenUseCase(req.headers.authorization.split(' ')[1]);
+    next();
+  } catch (e) {
+    res.status(401).send(e.message);
+  }
 };
 
 async function start() {
@@ -17,14 +21,22 @@ async function start() {
       origin: process.env.BACKEND_URL || ''
     }));
     app.post('/login', express.json(), async (req, res) => {
-      const { email, password } = req.body;
-      const token = await loginUseCase({ email, password });
-      res.send(token);
+      try {
+        const { email, password } = req.body;
+        const token = await loginUseCase({ email, password });
+        res.send(token);
+      } catch (e) {
+        res.status(404).send(e.message);
+      }
     });
     app.post('/sign-up', express.json(), async (req, res) => {
       const { email, password, name } = req.body;
-      const token = await signUpUseCase({ email, password, name });
-      res.send(token);
+      try {
+        const token = await signUpUseCase({ email, password, name });
+        res.send(token);
+      } catch (e) {
+        res.status(409).send(e.message);
+      }
     });
     app.use('/graphql', authMiddleware, (req, res) => {
       graphqlHTTP({
