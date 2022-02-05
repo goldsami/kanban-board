@@ -1,5 +1,5 @@
 import { getProjectsUseCase } from '../../../domain';
-import { GraphQLList, GraphQLNonNull, GraphQLString } from 'graphql';
+import { GraphQLList } from 'graphql';
 import { ProjectType } from '../../types';
 
 export const projectsQuery = {
