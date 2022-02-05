@@ -6,6 +6,7 @@ import { loginUseCase, signUpUseCase, verifyTokenUseCase } from './domain';
 
 const authMiddleware = async (req, res, next) => {
   try {
+    if (!req.headers.authorization) throw new Error('There\'s no token provided.');
     res.locals.userId = await verifyTokenUseCase(req.headers.authorization.split(' ')[1]);
     next();
   } catch (e) {
@@ -50,7 +51,7 @@ async function start() {
 
     app.listen(port);
 
-    console.log(`GraphQL API server running at localhost:${port}`);
+    console.log(`Server running at localhost:${port}`);
   } catch (e) {
     console.log(
       'server error', e.message
