@@ -1,5 +1,5 @@
 import { GraphQLNonNull, GraphQLString } from 'graphql';
-import { deleteTaskUseCase } from '../../../domain';
+import { deleteTaskUseCase } from '@domain';
 import { TaskType } from '../../types';
 
 export const deleteTaskMutation = {

@@ -1,4 +1,4 @@
-import { createTaskUseCase } from '../../../domain';
+import { createTaskUseCase } from '@domain';
 import { CreateTaskType, TaskType } from '../../types';
 
 export const createTaskMutation = {

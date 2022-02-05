@@ -1,5 +1,5 @@
 import { GraphQLNonNull, GraphQLString } from 'graphql';
-import { updateProjectUseCase } from '../../../domain';
+import { updateProjectUseCase } from '@domain';
 import { CreateProjectType, ProjectType } from '../../types';
 
 export const updateProjectMutation = {

@@ -1,5 +1,5 @@
 import { GraphQLNonNull, GraphQLString } from 'graphql';
-import { deleteUserUseCase } from '../../../domain';
+import { deleteUserUseCase } from '@domain';
 import { UserType } from '../../types';
 
 export const deleteUserMutation = {

@@ -1,4 +1,4 @@
-import { getUserUseCase } from '../../../domain';
+import { getUserUseCase } from '@domain';
 import { GraphQLNonNull, GraphQLString } from 'graphql';
 import { UserType } from '../../types';
 
