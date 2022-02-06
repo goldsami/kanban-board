@@ -54,7 +54,7 @@ async function start() {
     console.log(`Server running at localhost:${port}`);
   } catch (e) {
     console.log(
-      'server error', e.message
+      'Server error', e.message
     );
 
   }

@@ -8,7 +8,6 @@ export const deleteUserMutation = {
     id: { type: new GraphQLNonNull(GraphQLString) },
   },
   resolve: (_, { id }) => {
-
     return deleteUserUseCase(id);
   },
 };

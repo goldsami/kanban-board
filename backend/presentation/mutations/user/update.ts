@@ -9,7 +9,6 @@ export const updateUserMutation = {
     data: { type: CreateUserType },
   },
   resolve: (_, { id, data }) => {
-
     return updateUserUseCase(id, data);
   },
 };

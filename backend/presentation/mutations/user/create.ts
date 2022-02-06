@@ -7,7 +7,6 @@ export const createUserMutation = {
     data: { type: CreateUserType },
   },
   resolve: (_, { data }) => {
-
     return createUserUseCase(data);
   },
 };
