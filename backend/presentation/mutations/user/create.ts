@@ -1,4 +1,4 @@
-import { createUserUseCase } from '../../../domain';
+import { createUserUseCase } from '@domain';
 import { CreateUserType, UserType } from '../../types';
 
 export const createUserMutation = {

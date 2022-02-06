@@ -1,4 +1,4 @@
-import { createProjectUseCase } from '../../../domain';
+import { createProjectUseCase } from '@domain';
 import { CreateProjectType, ProjectType } from '../../types';
 
 export const createProjectMutation = {

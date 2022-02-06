@@ -1,5 +1,5 @@
 import { GraphQLNonNull, GraphQLString } from 'graphql';
-import { deleteProjectUseCase } from '../../../domain';
+import { deleteProjectUseCase } from '@domain';
 import { ProjectType } from '../../types';
 
 export const deleteProjectMutation = {
