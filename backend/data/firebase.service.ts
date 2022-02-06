@@ -47,6 +47,8 @@ export class FirebaseService {
   }
 
   private toDocumentData(snapshot: DocumentSnapshot<DocumentData>): DocumentData {
+    if (!snapshot.data()) throw new Error('Item not found');
+
     return { id: snapshot.id, ...snapshot.data() };
   }
 }
