@@ -1,5 +1,5 @@
 import { GraphQLNonNull, GraphQLString } from 'graphql';
-import { updateTaskUseCase } from '@domain';
+import { updateTaskUseCase } from '../../../domain';
 import { CreateTaskType, TaskType } from '../../types';
 
 export const updateTaskMutation = {

@@ -1,6 +1,6 @@
 import { where } from 'firebase/firestore';
 import { injectable } from 'inversify';
-import { Project, ProjectRepository } from '@domain';
+import { Project, ProjectRepository } from '../../domain';
 import { FirebaseService, TABLE_NAMES } from '../firebase.service';
 
 @injectable()

@@ -1,8 +1,8 @@
 import express from 'express';
 import { graphqlHTTP } from 'express-graphql';
-import { Schema } from '@presentation';
+import { Schema } from './presentation';
 import cors from 'cors';
-import { loginUseCase, signUpUseCase, verifyTokenUseCase } from '@domain';
+import { loginUseCase, signUpUseCase, verifyTokenUseCase } from './domain';
 
 const authMiddleware = async (req, res, next) => {
   try {

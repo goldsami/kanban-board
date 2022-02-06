@@ -1,6 +1,6 @@
 import { where } from 'firebase/firestore';
 import { injectable } from 'inversify';
-import { Task, TaskRepository } from '@domain';
+import { Task, TaskRepository } from '../../domain';
 import { FirebaseService, TABLE_NAMES } from '../firebase.service';
 
 @injectable()

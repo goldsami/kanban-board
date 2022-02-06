@@ -1,4 +1,4 @@
-import { getProjectsUseCase } from '@domain';
+import { getProjectsUseCase } from '../../../domain';
 import { GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLString } from 'graphql';
 import { ProjectType } from '..';
 

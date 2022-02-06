@@ -1,4 +1,4 @@
-import { getUserUseCase } from '@domain';
+import { getUserUseCase } from '../../../domain';
 import { UserType } from '../../types';
 
 export const selfQuery = {

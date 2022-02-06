@@ -1,5 +1,5 @@
 import { GraphQLNonNull, GraphQLString } from 'graphql';
-import { updateUserUseCase } from '@domain';
+import { updateUserUseCase } from '../../../domain';
 import { CreateUserType, UserType } from '../../types';
 
 export const updateUserMutation = {

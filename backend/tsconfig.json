@@ -21,21 +21,6 @@
     "paths": {
       "*": [
         "node_modules/*"
-      ],
-      "@domain": [
-        "domain"
-      ],
-      "@di": [
-        "di"
-      ],
-      "@presentation": [
-        "presentation"
-      ],
-      "@data": [
-        "data"
-      ],
-      "@auth": [
-        "auth"
       ]
     }
   },

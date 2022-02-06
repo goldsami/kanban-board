@@ -1,4 +1,4 @@
-import { getTasksUseCase } from '@domain';
+import { getTasksUseCase } from '../../../domain';
 import { GraphQLList, GraphQLNonNull, GraphQLString } from 'graphql';
 import { TaskType } from '../../types';
 
