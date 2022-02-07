@@ -1,4 +1,5 @@
 import { GraphQLObjectType } from 'graphql';
+import { createListMutation, deleteListMutation, updateListMutation } from './list';
 import { createProjectMutation, deleteProjectMutation, updateProjectMutation } from './project';
 import { createTaskMutation, deleteTaskMutation, updateTaskMutation } from './task';
 // import { createUserMutation, deleteUserMutation, updateUserMutation } from './user';
@@ -16,5 +17,8 @@ export const mutation = new GraphQLObjectType({
     createTask: createTaskMutation,
     updateTask: updateTaskMutation,
     deleteTask: deleteTaskMutation,
+    createList: createListMutation,
+    updateList: updateListMutation,
+    deleteList: deleteListMutation,
   },
 });

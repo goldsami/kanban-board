@@ -1,6 +1,6 @@
 export class Task {
   id: string;
   name: string;
-  projectId: string;
+  listId: string;
   description: string;
 }

@@ -7,6 +7,7 @@ export enum TABLE_NAMES {
   USERS = 'users',
   TASKS = 'tasks',
   PROJECTS = 'projects',
+  LIST = 'list',
 }
 
 export class FirebaseService {

@@ -16,8 +16,8 @@ export class TaskAdapter implements TaskRepository {
     return { ...res } as Task;
   }
 
-  async getList(projectId: string): Promise<Task[]> {
-    return (await this.firebaseService.getList(where('projectId', '==', projectId))).map(x => ({ ...x } as Task));
+  async getList(listId: string): Promise<Task[]> {
+    return (await this.firebaseService.getList(where('listId', '==', listId))).map(x => ({ ...x } as Task));
   }
 
   async delete(id: string): Promise<Task> {

@@ -1,4 +1,5 @@
 import { GraphQLObjectType } from 'graphql';
+import { listQuery, listsQuery } from './list';
 import { projectQuery, projectsQuery } from './project';
 import { taskQuery, tasksQuery } from './task';
 import { selfQuery } from './user';
@@ -15,5 +16,7 @@ export const query = new GraphQLObjectType({
     project: projectQuery,
     tasks: tasksQuery,
     task: taskQuery,
+    lists: listsQuery,
+    list: listQuery,
   },
 });
