@@ -54,7 +54,7 @@
 
 	const res = query(selfQ);
 	const res2 = query(projectsQ, {
-		variables: { userId: uid },
+	  variables: { userId: uid },
 	});
 	$: res2.refetch({ userId: uid });
 	res2.subscribe(console.log);
