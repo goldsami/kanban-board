@@ -10,7 +10,7 @@ const authMiddleware = async (req, res, next) => {
     res.locals.userId = await verifyTokenUseCase(req.headers.authorization.split(' ')[1]);
     next();
   } catch (e) {
-    res.status(401).send(e.message);
+    res.status(401).send('Auth error: ' + e.message);
   }
 };
 
