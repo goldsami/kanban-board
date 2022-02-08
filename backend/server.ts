@@ -3,6 +3,8 @@ import { graphqlHTTP } from 'express-graphql';
 import { Schema } from './presentation';
 import cors from 'cors';
 import { loginUseCase, signUpUseCase, verifyTokenUseCase } from './domain';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('dotenv').config();
 
 const authMiddleware = async (req, res, next) => {
   try {
