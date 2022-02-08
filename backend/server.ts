@@ -19,7 +19,7 @@ async function start() {
     const port = process.env.PORT || 3000;
     const app = express();
     app.use(cors({
-      origin: process.env.BACKEND_URL || ''
+      origin: process.env.FRONTEND_URL || ''
     }));
     app.post('/login', express.json(), async (req, res) => {
       try {
