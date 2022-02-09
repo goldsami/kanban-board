@@ -25,9 +25,12 @@
 </script>
 
 <Router>
-	<nav>
-		<Link to="/">Home</Link>
-		<Link to="login">Login</Link>
+	<nav class="breadcrumb" aria-label="breadcrumbs">
+		<ul>
+			<li class="">active</li>
+			<li><Link to="/">Home</Link></li>
+			<li><Link to="login">Login</Link></li>
+		</ul>
 	</nav>
 	<div>
 		<Route path="/">home</Route>
@@ -48,4 +51,5 @@
 </Router>
 
 <style>
+	@import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
 </style>
