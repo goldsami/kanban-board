@@ -6,6 +6,12 @@
   <router-view/>
 </template>
 
+<script>
+
+// import { store } from '@/store';
+
+</script>
+
 <style>
 
 </style>
