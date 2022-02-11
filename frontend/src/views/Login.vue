@@ -2,7 +2,18 @@
 import { ref } from 'vue';
 import { store } from '@/store';
 import axios from 'axios';
+import { useQuery } from '@vue/apollo-composable';
+import gql from 'graphql-tag';
 import { useRouter } from 'vue-router';
+
+const q = gql`
+  query Me {
+    me {
+      id
+      name
+    }
+  }
+`;
 
 const router = useRouter();
 const email = ref('');
@@ -20,8 +31,15 @@ function login() {
     })
     .then((x) => {
       console.log('token: ', x);
+      store.token = x.data;
       store.isAuthenticated = true;
-      router.replace({ path: '/' });
+      const result = useQuery(q);
+      // result((d) => console.log('lol', d));
+
+      result.onResult((res) => {
+        store.user = res.data.me;
+        router.replace({ path: '/' });
+      });
     });
 }
 </script>
