@@ -20,9 +20,7 @@ async function start() {
   try {
     const port = process.env.PORT || 3000;
     const app = express();
-    app.use(cors({
-      origin: process.env.FRONTEND_URL || ''
-    }));
+    app.use(cors());
     app.post('/login', express.json(), async (req, res) => {
       try {
         const { email, password } = req.body;
