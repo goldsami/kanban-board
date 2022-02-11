@@ -5,8 +5,7 @@ import { store } from '../store';
 const authGuard = (to, from, next) => {
   if (store.isAuthenticated) {
     next();
-  }
-  next({ name: 'Login' });
+  } else next({ name: 'Login' });
 };
 
 const routes = [
