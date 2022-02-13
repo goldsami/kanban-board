@@ -38,6 +38,8 @@ function login() {
 
       result.onResult((res) => {
         store.user = res.data.me;
+        localStorage.setItem('token', x.data);
+        localStorage.setItem('user', res.data.me);
         router.replace({ path: '/' });
       });
     });
