@@ -10,6 +10,13 @@
 
 <script>
 // import { store } from '@/store';
+import M from 'materialize-css';
+
+export default {
+  mounted() {
+    M.AutoInit();
+  },
+};
 </script>
 
 <style>

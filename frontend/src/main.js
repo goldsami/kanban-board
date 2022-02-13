@@ -8,6 +8,7 @@ import {
 import App from './App.vue';
 import router from './router';
 import { store } from './store';
+import 'materialize-css/dist/css/materialize.min.css';
 
 const authMiddleware = new ApolloLink((operation, forward) => {
   // add the authorization to the headers
