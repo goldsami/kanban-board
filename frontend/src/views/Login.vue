@@ -18,6 +18,8 @@ const q = gql`
 const router = useRouter();
 const email = ref('');
 const password = ref('');
+// const url = 'http://localhost:3000';
+const url = 'https://obscure-forest-51635.herokuapp.com';
 function login() {
   console.log('login', {
     email: email.value,
@@ -25,7 +27,7 @@ function login() {
     isAuth: store.isAuthenticated,
   });
   axios
-    .post('http://localhost:3000/login', {
+    .post(`${url}/login`, {
       email: email.value,
       password: password.value,
     })
