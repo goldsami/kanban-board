@@ -9,7 +9,7 @@ import HelloWorld from '@/components/HelloWorld.vue';
     <a class="waves-effect waves-light btn">button</a>
     <hr />
     Hello
-    {{ store.user.name }}
+    {{ store.user?.name }}
     <img alt="Vue logo" src="../assets/logo.png" />
     <HelloWorld msg="message!" />
   </div>

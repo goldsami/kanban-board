@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { store } from '@/store';
 import Home from '../views/Home.vue';
-import { store } from '../store';
 
 const authGuard = (to, from, next) => {
   if (store.isAuthenticated) {
@@ -24,6 +24,15 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue'),
+  },
+  {
+    path: '/logout',
+    name: 'logout',
+    beforeEnter() {
+      store.logout();
+      // eslint-disable-next-line no-restricted-globals
+      location.reload();
+    },
   },
 ];
 
