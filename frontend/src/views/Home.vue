@@ -2,6 +2,7 @@
 import { store } from '@/store';
 // @ is an alias to /src
 import 'materialize-css';
+import HelloWorld from '@/components/HelloWorld.vue';
 </script>
 <template>
   <div class="home">
