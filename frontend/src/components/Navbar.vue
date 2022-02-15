@@ -10,17 +10,10 @@
           </li>
         </template>
         <template v-else>
-          <li
-              @focusout="showDropdown=false"
-              tabindex="0">
-            <a
-              @click="showDropdown=true" class="dropdown-trigger" href="#!" data-target="dropdown1">
-              {{store.user.name}}
-            </a>
-            <ul v-if="showDropdown" id="dropdown1" class="dropdown-content">
-              <li><router-link href="/logout">Logout</router-link></li>
-            </ul>
+          <li>
+            {{store.user?.name}}
           </li>
+          <li><router-link to="/logout">Logout</router-link></li>
         </template>
       </ul>
     </div>
@@ -29,20 +22,11 @@
 
 <script setup>
 import { store } from '@/store';
-import { ref } from 'vue';
-
-const showDropdown = ref(false);
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
  .nav-wrapper {
    margin-left: 15px;
- }
-
- .dropdown-content {
-   display: block;
-   opacity: 1;
-   position: relative;
  }
 </style>
