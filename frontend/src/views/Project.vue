@@ -4,10 +4,16 @@ import { useQuery } from '@vue/apollo-composable';
 import { useRoute } from 'vue-router';
 
 const q = gql`
-  query Project($id: id!) {
-    project(id: $id {
+  query Project($id: String!) {
+    project(id: $id) {
       id
       name
+      lists {
+        name
+        tasks {
+          name
+        }
+      }
     }
   }
 `;
@@ -34,7 +40,13 @@ const { result, loading } = useQuery(q, {
     </div>
     <div v-else>
       id: {{route.params.id}}
-      res: {{JSON.stringify(result)}}
+      res: {{result.project.name}}
+      <div v-for="(list, index) in result.project.lists" :key="index">
+        list: {{list.name}}
+        <div v-for="(task, taskI) in list.tasks" :key="taskI">
+          task: {{task.name}}
+        </div>
+      </div>
     </div>
   </div>
 </template>

@@ -28,7 +28,8 @@ const { result, loading } = useQuery(q);
       </div>
     </div>
     <div v-else>
-      <div :key="index" v-for="(proj, index) in result.projects">
+      <div :key="index" v-for="(proj, index) in result.projects"
+           @click="() => $router.push(`/projects/${proj.id}`)">
         {{proj.name}}
       </div>
     </div>

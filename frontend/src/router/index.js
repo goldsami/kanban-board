@@ -35,7 +35,7 @@ const routes = [
     beforeEnter: authGuard,
   },
   {
-    path: '/project/:id',
+    path: '/projects/:id',
     name: 'Project',
     component: Project,
     beforeEnter: authGuard,
@@ -62,7 +62,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory(),
   routes,
 });
 
