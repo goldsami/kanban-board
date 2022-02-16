@@ -6,11 +6,12 @@
         <template v-if="!store.isAuthenticated">
           <li><router-link to="/login">Log in</router-link></li>
           <li>
-            <router-link class="waves-effect waves-light btn teal" to="/login">Sign up</router-link>
+            <router-link class="waves-effect waves-light btn teal" to="/signup">
+              Sign up</router-link>
           </li>
         </template>
         <template v-else>
-          <li>
+          <li style="margin: 0 15px">
             {{store.user?.name}}
           </li>
           <li><router-link to="/logout">Logout</router-link></li>
