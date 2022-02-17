@@ -12,9 +12,9 @@ import 'materialize-css/dist/css/materialize.min.css';
 
 const authMiddleware = new ApolloLink((operation, forward) => {
   // add the authorization to the headers
-  console.log('middle', store);
+  // console.log('middle', store);
   const { token } = store;
-  console.log('bear');
+  // console.log('bear');
   operation.setContext({
     headers: {
       authorization: token ? `Bearer ${token}` : null,
@@ -39,10 +39,36 @@ const apolloClient = new ApolloClient({
   cache,
 });
 
-createApp({
+const app = createApp({
   setup() {
     provideApolloClient(apolloClient);
   },
 
   render: () => h(App),
-}).use(router).mount('#app');
+});
+
+app.directive('cl-out', {
+  beforeMount() {
+    console.log(1);
+  },
+  mounted(el, binding, vnode) {
+    el.clickOutsideEvent = (event) => {
+      // here I check that click was outside the el and his children
+      console.log('click outside', { vnode, binding, event });
+      binding.value();
+    };
+    document.body.addEventListener('click', el.clickOutsideEvent);
+  },
+  unmounted(el) {
+    document.body.removeEventListener('click', el.clickOutsideEvent);
+  },
+  // When the bound element is inserted into the DOM...
+  inserted(el) {
+    // Focus the element
+    console.log('instedted', el);
+  },
+});
+
+app.use(router);
+
+app.mount('#app');

@@ -11,10 +11,13 @@
           </li>
         </template>
         <template v-else>
-          <li style="margin: 0 15px">
-            {{store.user?.name}}
+          <li @click.prevent>
+            <a @click.stop="showDropdown = !showDropdown">{{store.user?.name}}</a>
+            <ul v-if="showDropdown" v-cl-out="tf.bind(null, 1)"
+                id='dropdown1' class='dropdown-content'>
+              <li><router-link to="/logout">Logout</router-link></li>
+            </ul>
           </li>
-          <li><router-link to="/logout">Logout</router-link></li>
         </template>
       </ul>
     </div>
@@ -23,11 +26,25 @@
 
 <script setup>
 import { store } from '@/store';
+import { ref } from 'vue';
+
+const showDropdown = ref(false);
+
+const tf = (a) => {
+  console.log('hello', { a, showDropdown });
+  showDropdown.value = false;
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
  .nav-wrapper {
    margin-left: 15px;
+ }
+
+ .dropdown-content {
+   display: block;
+   opacity: 1;
+   position: relative;
  }
 </style>
