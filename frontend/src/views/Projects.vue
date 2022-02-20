@@ -1,6 +1,7 @@
 <script setup>
 import gql from 'graphql-tag';
 import { useMutation, useQuery } from '@vue/apollo-composable';
+import ProjectCard from '@/components/ProjectCard.vue';
 
 const q = gql`
   query Projects {
@@ -12,7 +13,7 @@ const q = gql`
 `;
 
 const createProjectM = gql`
-  mutation CreateTask($data: CreateProjectType!) {
+  mutation CreateProject($data: CreateProjectType!) {
     createProject(data: $data){
       id
       name
@@ -20,8 +21,27 @@ const createProjectM = gql`
   }
 `;
 
-const { result, loading } = useQuery(q);
+const deleteProjM = gql`
+  mutation DeleteProject($id: String!) {
+    deleteProject(id: $id){
+      id
+      name
+    }
+  }
+`;
 
+const { result, loading } = useQuery(q);
+const { mutate: deleteProject } = useMutation(deleteProjM, () => ({
+  update: (cache, { data }) => {
+    const list = cache.readQuery({ query: q });
+    cache.writeQuery({
+      query: q,
+      data: {
+        projects: list.projects.filter((x) => x.id !== data.deleteProject.id),
+      },
+    });
+  },
+}));
 const { mutate: createProject } = useMutation(createProjectM, () => ({
   // variables: {
   //   text: newMessage.value,
@@ -53,15 +73,25 @@ const { mutate: createProject } = useMutation(createProjectM, () => ({
       </div>
     </div>
     <div v-else>
-      <a @click="createProject({
+      <div class="row">
+          <ProjectCard @close="deleteProject({id: proj.id})"
+                       :key="index" v-for="(proj, index) in result.projects"
+                       @click="() => $router.push(`/projects/${proj.id}`)" :title="proj.name">
+
+          </ProjectCard>
+        <ProjectCard title="Add project" type="secondary" @click="createProject({
           data: {
             name: 'proj-' + Math.random().toFixed(5)
           }
-        })">add project</a>
-      <div :key="index" v-for="(proj, index) in result.projects"
-           @click="() => $router.push(`/projects/${proj.id}`)">
-        {{proj.name}}
+        })"></ProjectCard>
+
       </div>
     </div>
   </div>
 </template>
+
+<style>
+  .card {
+    cursor: pointer;
+  }
+</style>
