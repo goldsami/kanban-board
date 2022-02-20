@@ -1,32 +1,35 @@
 <template>
-  <div class="flex m-10">
-    <draggable
-      class="dragArea list-group w-full"
-      :list="list"
-      @change="log"
-      group="people"
-    >
-      <div
-        class="list-group-item bg-gray-300 m-1 p-3 rounded-md text-center"
-        v-for="element in list"
-        :key="element.name"
+  <div style="display: flex">
+    <div class="list">
+      <draggable
+        :list="list"
+        @change="log($event, 'list1')"
+        group="people"
       >
-        {{ element.name }}
-      </div> </draggable
-    ><draggable
-      class="dragArea list-group w-full"
-      :list="list2"
-      @change="log"
-      group="people"
-    >
-      <div
-        class="list-group-item bg-gray-300 m-1 p-3 rounded-md text-center"
-        v-for="element in list2"
-        :key="element.name"
+        <div
+          class="list-group-item"
+          v-for="element in list"
+          :key="element.name"
+        >
+          {{ element.name }}
+        </div> </draggable
       >
-        {{ element.name }}
-      </div>
-    </draggable>
+    </div>
+    <div class="list">
+      <draggable
+        :list="list2"
+        @change="log($event, 'list2')"
+        group="people"
+      >
+        <div
+          class="list-group-item"
+          v-for="element in list2"
+          :key="element.name"
+        >
+          {{ element.name }}
+        </div>
+      </draggable>
+    </div>
   </div>
 </template>
 <script>
@@ -56,9 +59,35 @@ export default defineComponent({
     };
   },
   methods: {
-    log(event) {
-      console.log(event);
+    log(event, list) {
+      console.log({ event, list });
     },
   },
 });
 </script>
+
+<style>
+.list {
+  border: 1px solid black;
+  padding: 6px;
+  margin: 6px;
+  background: grey;
+}
+
+.list-group-item {
+  padding: 24px;
+  margin: 6px;
+  border: 1px solid gray;
+  background: white;
+  min-width: 300px;
+  /*cursor: pointer;*/
+}
+
+.sortable-ghost {
+  background: red;
+}
+
+[group] {
+  height: 100%;
+}
+</style>
