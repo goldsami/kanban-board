@@ -2,6 +2,7 @@
 import gql from 'graphql-tag';
 import { useMutation, useQuery } from '@vue/apollo-composable';
 import { useRoute } from 'vue-router';
+import Loader from '@/components/Loader.vue';
 
 const q = gql`
   query Project($id: String!) {
@@ -50,17 +51,7 @@ const { mutate: deleteTask } = useMutation(deleteTaskM);
 </script>
 <template>
   <div>
-    <div v-if="loading" class="preloader-wrapper big active">
-      <div class="spinner-layer spinner-blue-only">
-        <div class="circle-clipper left">
-          <div class="circle"></div>
-        </div><div class="gap-patch">
-        <div class="circle"></div>
-      </div><div class="circle-clipper right">
-        <div class="circle"></div>
-      </div>
-      </div>
-    </div>
+    <Loader v-if="loading"></Loader>
     <div v-else>
       id: {{route.params.id}}
       res: {{result.project.name}}
