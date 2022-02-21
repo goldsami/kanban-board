@@ -13,7 +13,7 @@
         <template v-else>
           <li @click.prevent>
             <a @click.stop="showDropdown = !showDropdown">{{store.user?.name}}</a>
-            <ul v-if="showDropdown" v-cl-out="tf.bind(null, 1)"
+            <ul v-if="showDropdown" v-click-outside="hideDropdown"
                 id='dropdown1' class='dropdown-content'>
               <li><router-link to="/logout">Logout</router-link></li>
             </ul>
@@ -30,13 +30,11 @@ import { ref } from 'vue';
 
 const showDropdown = ref(false);
 
-const tf = (a) => {
-  console.log('hello', { a, showDropdown });
+const hideDropdown = () => {
   showDropdown.value = false;
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
  .nav-wrapper {
    margin-left: 15px;

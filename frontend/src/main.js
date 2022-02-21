@@ -40,12 +40,9 @@ const app = createApp({
   render: () => h(App),
 });
 
-app.directive('cl-out', {
-  beforeMount() {
-    console.log(1);
-  },
-  mounted(el, binding, vnode) {
-    el.clickOutsideEvent = (event) => {
+app.directive('click-outside', {
+  mounted(el, binding) {
+    el.clickOutsideEvent = () => {
       binding.value();
     };
     document.body.addEventListener('click', el.clickOutsideEvent);
