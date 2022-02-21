@@ -7,7 +7,6 @@
 </template>
 
 <script>
-// import { store } from '@/store';
 import M from 'materialize-css';
 import Navbar from '@/components/Navbar.vue';
 
