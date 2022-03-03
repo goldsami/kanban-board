@@ -11,10 +11,10 @@
           </li>
         </template>
         <template v-else>
-          <li @click.prevent>
-            <a @click.stop="showDropdown = !showDropdown">{{store1.user?.name}}</a>
-            <ul v-if="showDropdown" v-click-outside="hideDropdown"
-                id='dropdown1' class='dropdown-content'>
+          <li>
+            <a class="dropdown-trigger" ref="dropdownTrigger"
+               data-target="dropdown1">{{store1.user?.name || 'drop'}}</a>
+            <ul id='dropdown1' class='dropdown-content'>
               <li><router-link to="/logout">Logout</router-link></li>
             </ul>
           </li>
@@ -26,23 +26,19 @@
 
 <script setup>
 import { store1 } from '@/store1';
-import { ref } from 'vue';
+import M from 'materialize-css';
+import {onMounted, ref} from "vue";
 
-const showDropdown = ref(false);
+const dropdownTrigger = ref(null)
+onMounted(() => {
+  console.log('on mount', dropdownTrigger)
+  M.Dropdown.init(dropdownTrigger)
+})
 
-const hideDropdown = () => {
-  showDropdown.value = false;
-};
 </script>
 
 <style scoped>
  .nav-wrapper {
    margin-left: 15px;
- }
-
- .dropdown-content {
-   display: block;
-   opacity: 1;
-   position: relative;
  }
 </style>
