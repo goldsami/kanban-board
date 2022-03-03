@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import { store } from '@/store';
 import Home from '../views/Home.vue';
 import Projects from '../views/Projects.vue';
 import Project from '../views/Project.vue';
+import {store} from "@/store";
 
 const authGuard = (to, from, next) => {
-  if (store.isAuthenticated) {
+  if (store.getters.isAuthenticated) {
     next();
   } else next({ name: 'Home' });
 };
@@ -23,7 +23,7 @@ const routes = [
     name: 'Home',
     component: Home,
     beforeEnter: (to, from, next) => {
-      if (store.isAuthenticated) {
+      if (store.getters.isAuthenticated) {
         next({ name: 'Projects' });
       } else next();
     },
@@ -54,15 +54,6 @@ const routes = [
     path: '/signup',
     name: 'SignUp',
     component: () => import('../views/SignUp.vue'),
-  },
-  {
-    path: '/logout',
-    name: 'logout',
-    beforeEnter() {
-      store.logout();
-      // eslint-disable-next-line no-restricted-globals
-      location.reload();
-    },
   },
 ];
 

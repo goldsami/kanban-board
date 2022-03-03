@@ -13,19 +13,15 @@ export const authModule = {
   mutations: {
     initializeStore(store) {
       store.token = localStorage.getItem('token') || null;
-      store.user = localStorage.getItem('user') || null;
+      store.user = JSON.parse(localStorage.getItem('user')) || null;
     },
     setUser(store, value) {
-      localStorage.setItem('user', value);
+      localStorage.setItem('user', JSON.stringify(value));
       store.user = value;
     },
     setToken(store, value) {
       localStorage.setItem('token', value);
       store.token = value;
-    },
-    logout(store) {
-      this.setToken(store, null);
-      this.setUser(store, null);
     },
   },
   actions: {
@@ -38,6 +34,10 @@ export const authModule = {
       context.commit('setToken', data);
       context.dispatch('getUser');
     },
+    logout(context) {
+      context.commit('setUser', null);
+      context.commit('setToken', null);
+    },
     async getUser(context) {
       const q = gql`
         query Me {
@@ -47,8 +47,8 @@ export const authModule = {
           }
         }
       `;
-      useQuery(q).onResult(({ data: { me } }) => {
-        context.commit('setUser', me);
+      useQuery(q).onResult(({ data }) => {
+        context.commit('setUser', data?.me);
       });
     },
   },

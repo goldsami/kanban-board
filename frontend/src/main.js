@@ -5,14 +5,13 @@ import {
 import {
   provideApolloClient,
 } from '@vue/apollo-composable';
-import { store1 } from '@/store1';
 import App from './App.vue';
 import router from './router';
 import { store } from './store';
 import 'materialize-css/dist/css/materialize.min.css';
 
 const authMiddleware = new ApolloLink((operation, forward) => {
-  const { token } = store1;
+  const token = store.state.authModule.token;
   operation.setContext({
     headers: {
       authorization: token ? `Bearer ${token}` : null,
@@ -53,7 +52,7 @@ app.directive('click-outside', {
   },
 });
 
-app.use(router);
 app.use(store);
+app.use(router);
 
 app.mount('#app');
