@@ -14,6 +14,7 @@ export default {
   components: { Navbar },
   mounted() {
     M.AutoInit();
+    this.$store.commit('initializeStore');
   },
 };
 </script>

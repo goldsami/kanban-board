@@ -3,6 +3,7 @@ module.exports = {
   env: {
     node: true,
   },
+  plugins: ['only-warn'],
   extends: [
     'plugin:vue/vue3-essential',
     '@vue/airbnb',

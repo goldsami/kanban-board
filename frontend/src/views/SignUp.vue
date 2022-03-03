@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import { store } from '@/store';
+import { store1 } from '@/store1';
 import axios from 'axios';
 import { useQuery } from '@vue/apollo-composable';
 import gql from 'graphql-tag';
@@ -30,13 +30,13 @@ function signup() {
     })
     .then((x) => {
       console.log('token: ', x);
-      store.token = x.data;
-      store.isAuthenticated = true;
+      store1.token = x.data;
+      store1.isAuthenticated = true;
       const result = useQuery(q);
       // result((d) => console.log('lol', d));
 
       result.onResult((res) => {
-        store.user = res.data.me;
+        store1.user = res.data.me;
         localStorage.setItem('token', x.data);
         localStorage.setItem('user', JSON.stringify(res.data.me));
         router.replace({ path: '/' });
