@@ -1,10 +1,10 @@
+import { apolloClient } from '@/main';
 import { CreateProjectMutation, DeleteProjectMutation, ProjectsQuery } from './queries/project.query';
-import {apolloClient} from "@/main";
 
 export class ProjectService {
   static async getProjects() {
     const result = await apolloClient.query({
-      query: ProjectsQuery
+      query: ProjectsQuery,
     });
 
     return result.data.projects;
@@ -14,19 +14,19 @@ export class ProjectService {
     return apolloClient.mutate({
       mutation: DeleteProjectMutation,
       variables: {
-        id
-      }
-    })
+        id,
+      },
+    });
   }
 
   static async createProject(data) {
     const result = await apolloClient.mutate({
       mutation: CreateProjectMutation,
       variables: {
-        data
-      }
-    })
+        data,
+      },
+    });
 
-    return result.data.createProject
+    return result.data.createProject;
   }
 }

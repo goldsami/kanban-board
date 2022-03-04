@@ -24,10 +24,9 @@ export const projectsModule = {
   actions: {
     getProjects(context) {
       context.commit('setProjectsLoading', true);
-      ProjectService.getProjects().then(projects => {
+      ProjectService.getProjects().then((projects) => {
         context.commit('setProjects', projects);
-      }).finally(() =>
-        context.commit('setProjectsLoading', false))
+      }).finally(() => context.commit('setProjectsLoading', false));
     },
     createProject(context, createData) {
       ProjectService.createProject(createData).then((project) => {
@@ -36,10 +35,6 @@ export const projectsModule = {
     },
     deleteProject(context, id) {
       ProjectService.deleteProject(id).then(() => context.commit('deleteProject', id)).catch(console.error);
-    },
-  },
-  getters: {
-    tst(state) {
     },
   },
 };

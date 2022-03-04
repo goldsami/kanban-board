@@ -25,7 +25,7 @@
 <script setup>
 import M from 'materialize-css';
 import {
-  computed, onMounted, ref
+  computed, onMounted, ref,
 } from 'vue';
 import { useStore } from 'vuex';
 
