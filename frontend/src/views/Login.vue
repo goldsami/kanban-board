@@ -14,7 +14,7 @@ function login() {
     email: email.value,
     password: password.value,
     isAuth: store1.isAuthenticated,
-    store
+    store,
   });
   store.dispatch('login', { email: email.value, password: password.value });
 }

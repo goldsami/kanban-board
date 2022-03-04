@@ -24,8 +24,10 @@
 
 <script setup>
 import M from 'materialize-css';
-import {computed, onMounted, ref, watch} from "vue";
-import {useStore} from "vuex";
+import {
+  computed, onMounted, ref
+} from 'vue';
+import { useStore } from 'vuex';
 
 const store = useStore();
 const isAuthenticated = computed(() => store.getters.isAuthenticated);
@@ -36,11 +38,11 @@ function logout() {
   location.reload();
 }
 
-const dropdownTrigger = ref(null)
+const dropdownTrigger = ref(null);
 
 onMounted(() => {
-  M.Dropdown.init(dropdownTrigger)
-})
+  M.Dropdown.init(dropdownTrigger);
+});
 
 </script>
 

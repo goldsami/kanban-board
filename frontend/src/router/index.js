@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { store } from '@/store';
 import Home from '../views/Home.vue';
 import Projects from '../views/Projects.vue';
 import Project from '../views/Project.vue';
-import {store} from "@/store";
 
 const authGuard = (to, from, next) => {
   if (store.getters.isAuthenticated) {

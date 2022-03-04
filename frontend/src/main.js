@@ -11,7 +11,7 @@ import { store } from './store';
 import 'materialize-css/dist/css/materialize.min.css';
 
 const authMiddleware = new ApolloLink((operation, forward) => {
-  const token = store.state.authModule.token;
+  const { token } = store.state.authModule;
   operation.setContext({
     headers: {
       authorization: token ? `Bearer ${token}` : null,
@@ -27,7 +27,7 @@ const httpLink = createHttpLink({
 
 const cache = new InMemoryCache();
 
-const apolloClient = new ApolloClient({
+export const apolloClient = new ApolloClient({
   link: authMiddleware.concat(httpLink),
   cache,
 });

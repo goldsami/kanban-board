@@ -1,40 +1,32 @@
-import { useMutation, useQuery } from '@vue/apollo-composable';
 import { CreateProjectMutation, DeleteProjectMutation, ProjectsQuery } from './queries/project.query';
+import {apolloClient} from "@/main";
 
 export class ProjectService {
-  static getProjects() {
-    return useQuery(ProjectsQuery);
+  static async getProjects() {
+    const result = await apolloClient.query({
+      query: ProjectsQuery
+    });
+
+    return result.data.projects;
   }
 
-  static deleteProject(variables) {
-    const { mutate } = useMutation(DeleteProjectMutation, () => ({
-      update: (cache, { data }) => {
-        const list = cache.readQuery({ query: ProjectsQuery });
-        cache.writeQuery({
-          query: ProjectsQuery,
-          data: {
-            projects: list.projects.filter((x) => x.id !== data.deleteProject.id),
-          },
-        });
-      },
-    }));
-
-    return mutate(variables);
+  static deleteProject(id) {
+    return apolloClient.mutate({
+      mutation: DeleteProjectMutation,
+      variables: {
+        id
+      }
+    })
   }
 
-  static createProject(variables) {
-    const { mutate } = useMutation(CreateProjectMutation, () => ({
-      update: (cache, { data }) => {
-        const list = cache.readQuery({ query: ProjectsQuery });
-        cache.writeQuery({
-          query: ProjectsQuery,
-          data: {
-            projects: [...list.projects, data.createProject],
-          },
-        });
-      },
-    }));
+  static async createProject(data) {
+    const result = await apolloClient.mutate({
+      mutation: CreateProjectMutation,
+      variables: {
+        data
+      }
+    })
 
-    return mutate(variables);
+    return result.data.createProject
   }
 }
