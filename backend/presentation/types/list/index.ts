@@ -8,6 +8,7 @@ export const ListType = new GraphQLObjectType({
   fields: () => ({
     id: { type: new GraphQLNonNull(GraphQLString) },
     name: { type: new GraphQLNonNull(GraphQLString) },
+    projectId: { type: new GraphQLNonNull(GraphQLString) },
     tasks: {
       type: new GraphQLList(TaskType), resolve: ({ id }) => {
         return getTasksUseCase(id);

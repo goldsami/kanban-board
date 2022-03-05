@@ -6,6 +6,7 @@ export const TaskType = new GraphQLObjectType({
   fields: () => ({
     id: { type: new GraphQLNonNull(GraphQLString) },
     name: { type: new GraphQLNonNull(GraphQLString) },
+    listId: { type: new GraphQLNonNull(GraphQLString) },
   }),
 });
 
