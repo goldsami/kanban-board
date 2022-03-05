@@ -1,25 +1,11 @@
 <script setup>
 import gql from 'graphql-tag';
-import { useMutation, useQuery } from '@vue/apollo-composable';
-import { useRoute } from 'vue-router';
 import Loader from '@/components/Loader.vue';
+import { useRoute } from 'vue-router';
+import { useStore } from 'vuex';
+import { computed, onMounted } from 'vue';
 
-const q = gql`
-  query Project($id: String!) {
-    project(id: $id) {
-      id
-      name
-      lists {
-        id
-        name
-        tasks {
-          id
-          name
-        }
-      }
-    }
-  }
-`;
+const store = useStore();
 
 const createTaskM = gql`
   mutation CreateTask($data: CreateTaskType!) {
@@ -41,31 +27,23 @@ const deleteTaskM = gql`
 
 const route = useRoute();
 
-const { result, loading } = useQuery(q, {
-  id: route.params.id,
+const loading = computed(() => store.state.projectsModule.isLoading);
+const project = computed(() => store.getters.project(route.params.id));
+const lists = computed(() => store.getters.listsByProject(project?.value?.id));
+
+onMounted(() => {
+  store.dispatch('getProject', route.params.id);
 });
 
-const { mutate: createTask } = useMutation(createTaskM);
-const { mutate: deleteTask } = useMutation(deleteTaskM);
+console.log('store', store)
 
 </script>
 <template>
   <div>
+    Project:
     <Loader v-if="loading"></Loader>
-    <div v-else>
-      id: {{route.params.id}}
-      res: {{result.project.name}}
-      <div v-for="(list, index) in result.project.lists" :key="index">
-        list: {{list.name}}
-        <button
-          @click="createTask({
-          data: {listId: list.id, name: 'task' + Math.random().toFixed(4)}
-          })">
-          create task </button>
-        <div v-for="(task, taskI) in list.tasks" :key="taskI">
-          task: {{task.name}} <a @click="deleteTask({id: task.id})">&times;</a>
-        </div>
-      </div>
-    </div>
+    <div v-else>Proj: {{JSON.stringify(project)}}</div>
+    Lists:
+    <div v-for="list of lists">{{list.name}}</div>
   </div>
 </template>

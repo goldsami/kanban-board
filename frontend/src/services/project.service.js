@@ -1,5 +1,10 @@
 import { apolloClient } from '@/main';
-import { CreateProjectMutation, DeleteProjectMutation, ProjectsQuery } from './queries/project.query';
+import {
+  CreateProjectMutation,
+  DeleteProjectMutation,
+  ProjectQuery,
+  ProjectsQuery,
+} from './queries/project.query';
 
 export class ProjectService {
   static async getProjects() {
@@ -8,6 +13,17 @@ export class ProjectService {
     });
 
     return result.data.projects;
+  }
+
+  static async getProject(id) {
+    const result = await apolloClient.query({
+      query: ProjectQuery,
+      variables: {
+        id,
+      },
+    });
+
+    return result.data.project;
   }
 
   static deleteProject(id) {

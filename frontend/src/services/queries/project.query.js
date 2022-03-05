@@ -9,6 +9,25 @@ export const ProjectsQuery = gql`
   }
 `;
 
+export const ProjectQuery = gql`
+  query Project($id: String!) {
+    project(id: $id) {
+      id
+      name
+      lists {
+        id
+        name
+        projectId
+        tasks {
+          id
+          listId
+          name
+        }
+      }
+    }
+  }
+`;
+
 export const CreateProjectMutation = gql`
   mutation CreateProject($data: CreateProjectType!) {
     createProject(data: $data){

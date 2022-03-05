@@ -9,6 +9,7 @@ import App from './App.vue';
 import router from './router';
 import { store } from './store';
 import 'materialize-css/dist/css/materialize.min.css';
+import { BACKEND_URL } from '@/config';
 
 const authMiddleware = new ApolloLink((operation, forward) => {
   const { token } = store.state.authModule;
@@ -22,7 +23,8 @@ const authMiddleware = new ApolloLink((operation, forward) => {
 });
 
 const httpLink = createHttpLink({
-  uri: 'https://obscure-forest-51635.herokuapp.com/graphql',
+  uri: `${BACKEND_URL}/graphql`,
+  // uri: 'https://obscure-forest-51635.herokuapp.com/graphql',
 });
 
 const cache = new InMemoryCache();

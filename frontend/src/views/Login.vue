@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import { store1 } from '@/store1';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 
@@ -10,12 +9,6 @@ const password = ref('');
 
 const store = useStore();
 function login() {
-  console.log('login', {
-    email: email.value,
-    password: password.value,
-    isAuth: store1.isAuthenticated,
-    store,
-  });
   store.dispatch('login', { email: email.value, password: password.value });
 }
 </script>
