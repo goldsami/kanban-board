@@ -35,8 +35,6 @@ onMounted(() => {
   store.dispatch('getProject', route.params.id);
 });
 
-console.log('store', store)
-
 </script>
 <template>
   <div>

@@ -1,35 +1,23 @@
 <template>
-  <div style="display: flex">
-    <div class="list">
-      <draggable
-        :list="list"
-        @change="log($event, 'list1')"
-        group="people"
-      >
-        <div
-          class="list-group-item"
-          v-for="element in list"
-          :key="element.name"
+  <div>
+    <draggable  style="display: flex" :list="lists" @change="log($event, 'tst')" group="lsts">
+      <div class="list" v-for="list of lists">
+        <draggable
+          :list="list.data"
+          @change="log($event, list.name)"
+          group="people"
         >
-          {{ element.name }}
-        </div> </draggable
-      >
-    </div>
-    <div class="list">
-      <draggable
-        :list="list2"
-        @change="log($event, 'list2')"
-        group="people"
-      >
-        <div
-          class="list-group-item"
-          v-for="element in list2"
-          :key="element.name"
+          <div
+            class="list-group-item"
+            v-for="element in list.data"
+            :key="element.name"
+          >
+            {{ element.name }}
+          </div> </draggable
         >
-          {{ element.name }}
-        </div>
-      </draggable>
-    </div>
+      </div>
+    </draggable>
+
   </div>
 </template>
 <script>
@@ -43,17 +31,19 @@ export default defineComponent({
   data() {
     return {
       enabled: true,
-      list: [
-        { name: 'John', id: 1 },
-        { name: 'Joao', id: 2 },
-        { name: 'Jean', id: 3 },
-        { name: 'Gerard', id: 4 },
-      ],
-      list2: [
-        { name: 'John1', id: 11 },
-        { name: 'Joao1', id: 21 },
-        { name: 'Jean1', id: 31 },
-        { name: 'Gerard1', id: 41 },
+      lists: [
+        {name: 'list1', data:[
+            { name: 'John', id: 1 },
+            { name: 'Joao', id: 2 },
+            { name: 'Jean', id: 3 },
+            { name: 'Gerard', id: 4 },
+          ]},
+        {name: 'list2', data:  [
+            { name: 'John1', id: 11 },
+            { name: 'Joao1', id: 21 },
+            { name: 'Jean1', id: 31 },
+            { name: 'Gerard1', id: 41 },
+          ]}
       ],
       dragging: false,
     };
