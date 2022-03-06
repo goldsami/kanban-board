@@ -12,7 +12,11 @@ import 'materialize-css/dist/css/materialize.min.css';
 import { BACKEND_URL } from '@/config';
 
 const authMiddleware = new ApolloLink((operation, forward) => {
+  store.dispatch('checkToken');
   const { token } = store.state.authModule;
+  if (!token) {
+    location.reload();
+  }
   operation.setContext({
     headers: {
       authorization: token ? `Bearer ${token}` : null,

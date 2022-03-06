@@ -2,6 +2,7 @@ import axios from 'axios';
 import { BACKEND_URL } from '@/config';
 import gql from 'graphql-tag';
 import { useQuery } from '@vue/apollo-composable';
+import jwtDecode from 'jwt-decode';
 
 export const authModule = {
   state() {
@@ -12,7 +13,7 @@ export const authModule = {
   },
   mutations: {
     initializeStore(store) {
-      store.token = localStorage.getItem('token') || null;
+      store.token = localStorage.getItem('token') || '';
       store.user = JSON.parse(localStorage.getItem('user')) || null;
     },
     setUser(store, value) {
@@ -51,10 +52,15 @@ export const authModule = {
         context.commit('setUser', data?.me);
       });
     },
+    checkToken(context) {
+      if (context.state.token.value && jwtDecode(context.state.token).exp < Date.now() / 1000) {
+        context.dispatch('logout');
+      }
+    },
   },
   getters: {
     isAuthenticated(state) {
-      return !!state.user;
+      return !!state.token;
     },
   },
 };
