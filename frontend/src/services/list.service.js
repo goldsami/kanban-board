@@ -1,5 +1,5 @@
 import { apolloClient } from '@/main';
-import {CreateListMutation, DeleteListMutation} from "@/services/queries/list.query";
+import { CreateListMutation, DeleteListMutation } from '@/services/queries/list.query';
 
 export class ListService {
   static delete(id) {

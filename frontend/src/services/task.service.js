@@ -1,5 +1,5 @@
-import {CreateTaskMutation, DeleteTaskMutation} from "@/services/queries/task.query";
-import {apolloClient} from "@/main";
+import { CreateTaskMutation, DeleteTaskMutation } from '@/services/queries/task.query';
+import { apolloClient } from '@/main';
 
 export class TaskService {
   static delete(id) {

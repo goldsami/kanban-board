@@ -7,21 +7,21 @@
 
 <script>
 export default {
-  name: "Task",
+  name: 'Task',
   props: {
     id: String,
-    name: String
+    name: String,
   },
   methods: {
     deleteTask() {
-      this.$store.dispatch('deleteTask', this.id)
-    }
-  }
-}
+      this.$store.dispatch('deleteTask', this.id);
+    },
+  },
+};
 </script>
 
 <style scoped>
-  .list {
+  .task {
     min-height: 25px;
     background-color: white;
     padding: 10px;

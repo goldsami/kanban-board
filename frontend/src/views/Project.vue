@@ -4,7 +4,7 @@ import Loader from '@/components/Loader.vue';
 import { useRoute } from 'vue-router';
 import { useStore } from 'vuex';
 import { computed, onMounted } from 'vue';
-import List from "@/components/List.vue";
+import List from '@/components/List.vue';
 
 const store = useStore();
 

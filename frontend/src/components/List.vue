@@ -10,28 +10,29 @@
 </template>
 
 <script>
-import Task from "@/components/Task.vue";
+import Task from '@/components/Task.vue';
+
 export default {
-  name: "List",
-  components: {Task},
+  name: 'List',
+  components: { Task },
   props: {
     id: String,
-    name: String
+    name: String,
   },
   computed: {
     tasks() {
-      return this.$store.getters.tasksByList(this.id)
-    }
+      return this.$store.getters.tasksByList(this.id);
+    },
   },
   methods: {
     createTask(createData) {
-      this.$store.dispatch('createTask', createData)
+      this.$store.dispatch('createTask', createData);
     },
     deleteList() {
-      this.$store.dispatch('deleteList', this.id)
-    }
-  }
-}
+      this.$store.dispatch('deleteList', this.id);
+    },
+  },
+};
 </script>
 
 <style scoped>
