@@ -32,18 +32,24 @@ export default defineComponent({
     return {
       enabled: true,
       lists: [
-        {name: 'list1', data:[
+        {
+          name: 'list1',
+          data: [
             { name: 'John', id: 1 },
             { name: 'Joao', id: 2 },
             { name: 'Jean', id: 3 },
             { name: 'Gerard', id: 4 },
-          ]},
-        {name: 'list2', data:  [
+          ],
+        },
+        {
+          name: 'list2',
+          data: [
             { name: 'John1', id: 11 },
             { name: 'Joao1', id: 21 },
             { name: 'Jean1', id: 31 },
             { name: 'Gerard1', id: 41 },
-          ]}
+          ],
+        },
       ],
       dragging: false,
     };

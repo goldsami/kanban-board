@@ -10,8 +10,6 @@ export const tasksModule = {
     },
   },
   getters: {
-    tasksByList: (store) => (listId) => {
-      return store.tasks.filter((x) => x.listId === listId);
-    },
+    tasksByList: (store) => (listId) => store.tasks.filter((x) => x.listId === listId),
   },
 };
