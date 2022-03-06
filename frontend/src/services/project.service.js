@@ -26,7 +26,7 @@ export class ProjectService {
     return result.data.project;
   }
 
-  static deleteProject(id) {
+  static delete(id) {
     return apolloClient.mutate({
       mutation: DeleteProjectMutation,
       variables: {
@@ -35,7 +35,7 @@ export class ProjectService {
     });
   }
 
-  static async createProject(data) {
+  static async create(data) {
     const result = await apolloClient.mutate({
       mutation: CreateProjectMutation,
       variables: {

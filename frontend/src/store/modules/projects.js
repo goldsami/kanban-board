@@ -36,12 +36,12 @@ export const projectsModule = {
       }).finally(() => context.commit('setProjectsLoading', false));
     },
     createProject(context, createData) {
-      ProjectService.createProject(createData).then((project) => {
+      ProjectService.create(createData).then((project) => {
         context.commit('pushProjects', [project]);
       }).catch(console.error);
     },
     deleteProject(context, id) {
-      ProjectService.deleteProject(id).then(() => context.commit('deleteProject', id)).catch(console.error);
+      ProjectService.delete(id).then(() => context.commit('deleteProject', id)).catch(console.error);
     },
   },
   getters: {
