@@ -13,8 +13,8 @@
             :key="element.name"
           >
             {{ element.name }}
-          </div> </draggable
-        >
+          </div>
+        </draggable>
       </div>
     </draggable>
 
@@ -77,10 +77,6 @@ export default defineComponent({
   background: white;
   min-width: 300px;
   /*cursor: pointer;*/
-}
-
-.sortable-ghost {
-  background: red;
 }
 
 [group] {

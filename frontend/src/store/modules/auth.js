@@ -21,8 +21,8 @@ export const authModule = {
       store.user = value;
     },
     setToken(store, value) {
-      localStorage.setItem('token', value);
-      store.token = value;
+      localStorage.setItem('token', value || '');
+      store.token = value || '';
     },
   },
   actions: {
@@ -53,7 +53,7 @@ export const authModule = {
       });
     },
     checkToken(context) {
-      if (context.state.token.value && jwtDecode(context.state.token).exp < Date.now() / 1000) {
+      if (context.state.token && jwtDecode(context.state.token).exp < Date.now() / 1000) {
         context.dispatch('logout');
       }
     },

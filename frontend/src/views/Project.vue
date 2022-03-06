@@ -38,18 +38,25 @@ function deleteList(id) {
 function createList(createData) {
   store.dispatch('createList', createData);
 }
+function log(data) {
+  console.log(data);
+}
 
 onMounted(() => {
   store.dispatch('getProject', route.params.id);
 });
 
 </script>
+
 <template>
   <div>
     <Loader v-if="loading"></Loader>
     <div v-else>Proj: {{project?.name}}</div>
     <div class="lists">
-      <List :id="list.id" :name="list.name" v-for="list of lists"></List>
+      <draggable group="lists" :list="lists" style="display: flex" @change="log($event)">
+        <List :id="list.id" :name="list.name" v-for="list of lists"></List>
+      </draggable>
+
       <div @click="createList({
         name: 'ls-' + Math.random().toFixed(3).toString(),
         projectId: project.id

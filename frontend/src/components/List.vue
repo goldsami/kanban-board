@@ -1,7 +1,9 @@
 <template>
   <div class="list">
     <b>{{name}}</b><span @click="deleteList" style="padding: 5px">X</span><br>
-    <Task v-for="task of tasks" :id="task.id" :name="task.name"></Task>
+    <draggable group="tasks" :list="tasks" @change="log($event)">
+      <Task v-for="task of tasks" :id="task.id" :name="task.name"></Task>
+    </draggable>
     <button @click="createTask({
     name: `tsk-${Math.random().toFixed(3).toString()}`,
     listId: id
@@ -30,6 +32,9 @@ export default {
     },
     deleteList() {
       this.$store.dispatch('deleteList', this.id);
+    },
+    log(data) {
+      console.log(data);
     },
   },
 };

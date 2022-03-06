@@ -10,10 +10,12 @@ import router from './router';
 import { store } from './store';
 import 'materialize-css/dist/css/materialize.min.css';
 import { BACKEND_URL } from '@/config';
+import { VueDraggableNext } from 'vue-draggable-next';
 
 const authMiddleware = new ApolloLink((operation, forward) => {
   store.dispatch('checkToken');
   const { token } = store.state.authModule;
+  console.log('tokent', { token });
   if (!token) {
     location.reload();
   }
@@ -57,6 +59,8 @@ app.directive('click-outside', {
     document.body.removeEventListener('click', el.clickOutsideEvent);
   },
 });
+
+app.component('draggable', VueDraggableNext);
 
 app.use(store);
 app.use(router);
