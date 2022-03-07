@@ -1,7 +1,7 @@
 <template>
   <div class="list">
     <b>{{name}}</b><span @click="deleteList" style="padding: 5px">X</span><br>
-    <draggable group="tasks" :list="tasks" @change="log($event)">
+    <draggable group="tasks" :list="tasks" @change="dragHandle($event)">
       <Task v-for="task of tasks" :id="task.id" :name="task.name"></Task>
     </draggable>
     <button @click="createTask({
@@ -33,8 +33,13 @@ export default {
     deleteList() {
       this.$store.dispatch('deleteList', this.id);
     },
-    log(data) {
-      console.log(data);
+    addTask(taskId) {
+      this.$store.dispatch('updateTask', { id: taskId, data: { listId: this.id } });
+    },
+    dragHandle(event) {
+      if (event.added) {
+        this.addTask(event.added.element.id);
+      }
     },
   },
 };

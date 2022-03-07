@@ -15,7 +15,7 @@ import { VueDraggableNext } from 'vue-draggable-next';
 const authMiddleware = new ApolloLink((operation, forward) => {
   store.dispatch('checkToken');
   const { token } = store.state.authModule;
-  console.log('tokent', { token });
+
   if (!token) {
     location.reload();
   }
