@@ -1,5 +1,5 @@
 import { getTasksUseCase } from '../../../domain';
-import { GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLString } from 'graphql';
+import {GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
 import { TaskType } from '..';
 
 export const ListType = new GraphQLObjectType({
@@ -8,6 +8,7 @@ export const ListType = new GraphQLObjectType({
   fields: () => ({
     id: { type: new GraphQLNonNull(GraphQLString) },
     name: { type: new GraphQLNonNull(GraphQLString) },
+    order: { type: GraphQLInt },
     projectId: { type: new GraphQLNonNull(GraphQLString) },
     tasks: {
       type: new GraphQLList(TaskType), resolve: ({ id }) => {

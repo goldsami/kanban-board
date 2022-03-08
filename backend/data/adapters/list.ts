@@ -1,4 +1,4 @@
-import { where } from 'firebase/firestore';
+import {limit, orderBy, where} from 'firebase/firestore';
 import { injectable } from 'inversify';
 import { List, ListRepository } from '../../domain';
 import { FirebaseService, TABLE_NAMES } from '../firebase.service';
@@ -17,7 +17,15 @@ export class ListAdapter implements ListRepository {
   }
 
   async getList(projectId: string): Promise<List[]> {
-    return (await this.firebaseService.getList(where('projectId', '==', projectId))).map(x => ({ ...x } as List));
+    return (await this.firebaseService.getList(where('projectId', '==', projectId), orderBy('order','desc'))).map(x => ({ ...x } as List));
+  }
+
+  async getWhereOrderGreaterThan(projectId: string, order): Promise<List[]> {
+    return (await this.firebaseService.getList(where('projectId', '==', projectId), where('order', '>=', order))).map(x => ({ ...x } as List));
+  }
+
+  async getLast(projectId: string): Promise<List> {
+    return (await this.firebaseService.getList(where('projectId', '==', projectId), limit(1), orderBy('order','desc'))).map(x => ({ ...x } as List))[0];
   }
 
   async delete(id: string): Promise<List> {

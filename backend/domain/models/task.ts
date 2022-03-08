@@ -3,4 +3,5 @@ export class Task {
   name: string;
   listId: string;
   description: string;
+  order: number;
 }

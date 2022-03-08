@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { addDoc, collection, deleteDoc, doc, DocumentData, DocumentSnapshot, Firestore, getDoc, getDocs, getFirestore, query, QueryConstraint, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, DocumentData, DocumentSnapshot, Firestore, getDoc, getDocs, getFirestore, query, updateDoc } from 'firebase/firestore';
 import { FIREBASE_CONFIG } from './config/firebase';
 
 
@@ -20,8 +20,8 @@ export class FirebaseService {
     this.tableName = tableName;
   }
 
-  async getList(where?: QueryConstraint): Promise<DocumentData[]> {
-    const q = where ? query(collection(this.db, this.tableName), where) : query(collection(this.db, this.tableName));
+  async getList(...args): Promise<DocumentData[]> {
+    const q = query(collection(this.db, this.tableName), ...args);
     return (await getDocs(q)).docs.map(this.toDocumentData);
   }
 

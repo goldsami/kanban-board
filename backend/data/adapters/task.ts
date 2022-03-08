@@ -1,4 +1,4 @@
-import { where } from 'firebase/firestore';
+import {limit, orderBy, where} from 'firebase/firestore';
 import { injectable } from 'inversify';
 import { Task, TaskRepository } from '../../domain';
 import { FirebaseService, TABLE_NAMES } from '../firebase.service';
@@ -17,7 +17,15 @@ export class TaskAdapter implements TaskRepository {
   }
 
   async getList(listId: string): Promise<Task[]> {
-    return (await this.firebaseService.getList(where('listId', '==', listId))).map(x => ({ ...x } as Task));
+    return (await this.firebaseService.getList(where('listId', '==', listId), orderBy('order','desc'))).map(x => ({ ...x } as Task));
+  }
+
+  async getWhereOrderGreaterThan(listId: string, order: number): Promise<Task[]> {
+    return (await this.firebaseService.getList(where('listId', '==', listId), where('order', '>=', order))).map(x => ({ ...x } as Task));
+  }
+
+  async getLast(listId: string): Promise<Task> {
+    return (await this.firebaseService.getList(where('listId', '==', listId), limit(1), orderBy('order', 'desc'))).map(x => ({...x} as Task))[0];
   }
 
   async delete(id: string): Promise<Task> {

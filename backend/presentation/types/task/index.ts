@@ -1,4 +1,4 @@
-import { GraphQLNonNull, GraphQLObjectType, GraphQLString } from 'graphql';
+import {GraphQLInt, GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
 
 export const TaskType = new GraphQLObjectType({
   name: 'TaskType',
@@ -6,6 +6,7 @@ export const TaskType = new GraphQLObjectType({
   fields: () => ({
     id: { type: new GraphQLNonNull(GraphQLString) },
     name: { type: new GraphQLNonNull(GraphQLString) },
+    order: { type: GraphQLInt },
     listId: { type: new GraphQLNonNull(GraphQLString) },
   }),
 });
