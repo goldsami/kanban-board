@@ -34,12 +34,20 @@ export default {
     deleteList() {
       this.$store.dispatch('deleteList', this.id);
     },
+    updateTask(id, data) {
+      this.$store.dispatch('updateTask', { id, data });
+    },
     addTask(taskId) {
-      this.$store.dispatch('updateTask', { id: taskId, data: { listId: this.id } });
+      this.updateTask(taskId, { listId: this.id } )
+    },
+    moveTask(taskId, order) {
+      this.updateTask(taskId, {order})
     },
     dragHandle(event) {
       if (event.added) {
         this.addTask(event.added.element.id);
+      } else if (event.moved) {
+        this.moveTask(event.moved.element.id, this.tasks[event.moved.newIndex + 1].order + 1)
       }
     },
   },
