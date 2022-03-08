@@ -6,10 +6,10 @@ export async function updateTaskUseCase(id: string, userId: string, task: Partia
   const oldTask = await getTaskUseCase(id, userId);
 
   if (isFinite(task.order)) {
-    const greaterLists = await repository.getWhereOrderGreaterThan(oldTask.listId, task.order)
+    const greaterLists = await repository.getWhereOrderGreaterThan(oldTask.listId, task.order);
 
     for (const l of greaterLists.filter(x => x.id !== id)) {
-      await repository.update(l.id, {order: l.order + 1})
+      await repository.update(l.id, {order: l.order + 1});
     }
   }
 
