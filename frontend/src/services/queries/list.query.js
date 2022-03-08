@@ -6,6 +6,7 @@ export const CreateListMutation = gql`
       id
       name
       projectId
+      order
     }
   }
 `;
@@ -16,6 +17,7 @@ export const DeleteListMutation = gql`
       id
       name
       projectId
+      order
     }
   }
 `;

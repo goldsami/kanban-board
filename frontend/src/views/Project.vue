@@ -54,7 +54,7 @@ onMounted(() => {
     <div v-else>Proj: {{project?.name}}</div>
     <div class="lists">
       <draggable group="lists" :list="lists" style="display: flex" @change="log($event)">
-        <List :id="list.id" :name="list.name" v-for="list of lists"></List>
+        <List :id="list.id" :name="list.name" v-for="list of lists" :order="list.order"></List>
       </draggable>
 
       <div @click="createList({

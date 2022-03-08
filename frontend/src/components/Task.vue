@@ -1,6 +1,6 @@
 <template>
   <div class="task">
-    {{name}}
+    {{order}}::{{name}}
     <span @click="deleteTask" style="padding: 5px">X</span>
   </div>
 </template>
@@ -11,6 +11,7 @@ export default {
   props: {
     id: String,
     name: String,
+    order: Number,
   },
   methods: {
     deleteTask() {

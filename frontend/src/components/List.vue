@@ -1,8 +1,8 @@
 <template>
   <div class="list">
-    <b>{{name}}</b><span @click="deleteList" style="padding: 5px">X</span><br>
+    <b>{{order}}:: {{name}}</b><span @click="deleteList" style="padding: 5px">X</span><br>
     <draggable group="tasks" :list="tasks" @change="dragHandle($event)">
-      <Task v-for="task of tasks" :id="task.id" :name="task.name"></Task>
+      <Task v-for="task of tasks" :id="task.id" :name="task.name" :order="task.order"></Task>
     </draggable>
     <button @click="createTask({
     name: `tsk-${Math.random().toFixed(3).toString()}`,
@@ -20,6 +20,7 @@ export default {
   props: {
     id: String,
     name: String,
+    order: Number,
   },
   computed: {
     tasks() {

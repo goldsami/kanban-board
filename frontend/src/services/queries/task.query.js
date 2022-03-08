@@ -6,6 +6,7 @@ export const CreateTaskMutation = gql`
       id
       name
       listId
+      order
     }
   }
 `;
@@ -16,6 +17,7 @@ export const UpdateTaskMutation = gql`
       id
       name
       listId
+      order
     }
   }
 `;

@@ -17,11 +17,13 @@ export const ProjectQuery = gql`
       lists {
         id
         name
+        order
         projectId
         tasks {
           id
           listId
           name
+          order
         }
       }
     }
