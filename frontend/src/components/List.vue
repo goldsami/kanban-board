@@ -37,15 +37,15 @@ export default {
     updateTask(id, data) {
       this.$store.dispatch('updateTask', { id, data });
     },
-    addTask(taskId) {
-      this.updateTask(taskId, { listId: this.id } )
+    addTask(taskId, order) {
+      this.updateTask(taskId, { listId: this.id, order } )
     },
     moveTask(taskId, order) {
       this.updateTask(taskId, {order})
     },
     dragHandle(event) {
       if (event.added) {
-        this.addTask(event.added.element.id);
+        this.addTask(event.added.element.id, (this.tasks[event.added.newIndex + 1]?.order || 0) + 1);
       } else if (event.moved) {
         this.moveTask(event.moved.element.id, (this.tasks[event.moved.newIndex + 1]?.order || 0) + 1)
       }
