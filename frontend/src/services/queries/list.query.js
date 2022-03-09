@@ -10,6 +10,16 @@ export const CreateListMutation = gql`
     }
   }
 `;
+export const UpdateListMutation = gql`
+  mutation UpdateList($id: String!, $data: CreateListType!) {
+    updateList(id: $id, data: $data){
+      id
+      name
+      projectId
+      order
+    }
+  }
+`;
 
 export const DeleteListMutation = gql`
   mutation DeleteList($id: String!) {
