@@ -1,9 +1,9 @@
 <script setup>
 import gql from 'graphql-tag';
 import Loader from '@/components/Loader.vue';
-import {useRoute} from 'vue-router';
-import {useStore} from 'vuex';
-import {computed, onMounted} from 'vue';
+import { useRoute } from 'vue-router';
+import { useStore } from 'vuex';
+import { computed, onMounted } from 'vue';
 import List from '@/components/List.vue';
 
 const store = useStore();
@@ -22,12 +22,12 @@ function createList(createData) {
 }
 
 function updateList(id, data) {
-  store.dispatch('updateList', {id, data})
+  store.dispatch('updateList', { id, data });
 }
 
 function dragHandle(event) {
-  const newOrder = lists.value[event.moved.newIndex + 1]?.order || (lists.value[lists.value.length - 2].order + 1)
-  updateList(event.moved.element.id, { order: newOrder })
+  const newOrder = lists.value[event.moved.newIndex + 1]?.order || (lists.value[lists.value.length - 2].order + 1);
+  updateList(event.moved.element.id, { order: newOrder });
 }
 
 onMounted(() => {

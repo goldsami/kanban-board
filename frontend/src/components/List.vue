@@ -38,17 +38,17 @@ export default {
       this.$store.dispatch('updateTask', { id, data });
     },
     addTask(taskId, order) {
-      this.updateTask(taskId, { listId: this.id, order } )
+      this.updateTask(taskId, { listId: this.id, order });
     },
     moveTask(taskId, order) {
-      this.updateTask(taskId, {order})
+      this.updateTask(taskId, { order });
     },
     dragHandle(event) {
       if (event.added) {
         // TODO: refactor
         this.addTask(event.added.element.id, (this.tasks[event.added.newIndex + 1]?.order || 0) + 1);
       } else if (event.moved) {
-        this.moveTask(event.moved.element.id, (this.tasks[event.moved.newIndex + 1]?.order || 0) + 1)
+        this.moveTask(event.moved.element.id, (this.tasks[event.moved.newIndex + 1]?.order || 0) + 1);
       }
     },
   },
