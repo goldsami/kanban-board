@@ -1,4 +1,4 @@
-import { TaskService } from '@/services/task.service';
+import {TaskService} from '@/services/task.service';
 
 export const tasksModule = {
   state() {
@@ -15,15 +15,17 @@ export const tasksModule = {
       if (!(index + 1)) {
         store.tasks.push(task);
       } else {
-        store.tasks[index] = { ...store.tasks[index], ...task };
+        store.tasks[index] = {...store.tasks[index], ...task};
       }
     },
     deleteTask(store, id) {
       store.tasks = store.tasks.filter((x) => x.id !== id);
     },
-    increaseOrderFrom(store, orderFrom) {
-      store.tasks.filter(x => x.order >= orderFrom).forEach((x, index) => {
-        store.tasks[index] = {...x, order: x.order + 1}
+    increaseOrderFrom(store, {order, except}) {
+      store.tasks.filter(x => x.order >= order).forEach((x, index) => {
+        if (except !== x.id) {
+          store.tasks[index] = {...store.tasks[index], order: store.tasks[index].order + 1}
+        }
       })
     }
   },
@@ -36,17 +38,17 @@ export const tasksModule = {
     deleteTask(context, id) {
       TaskService.delete(id).then(() => context.commit('deleteTask', id)).catch(console.error);
     },
-    updateTask(context, { id, data }) {
+    updateTask(context, {id, data}) {
       if ('listId' in data || 'order' in data) {
-        context.commit('upsertTask', { id, ...data });
+        context.commit('upsertTask', {id, ...data});
       }
       if ('order' in data) {
-        context.commit('increaseOrderFrom', data.order)
+        context.commit('increaseOrderFrom', {order: data.order, except: id})
       }
       TaskService.update(id, data).catch(console.error);
     },
   },
   getters: {
-    tasksByList: (store) => (listId) => store.tasks.filter((x) => x.listId === listId).sort((a,b) => b.order - a.order),
+    tasksByList: (store) => (listId) => store.tasks.filter((x) => x.listId === listId).sort((a, b) => b.order - a.order),
   },
 };

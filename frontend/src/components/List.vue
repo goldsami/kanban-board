@@ -47,7 +47,7 @@ export default {
       if (event.added) {
         this.addTask(event.added.element.id);
       } else if (event.moved) {
-        this.moveTask(event.moved.element.id, this.tasks[event.moved.newIndex + 1].order + 1)
+        this.moveTask(event.moved.element.id, (this.tasks[event.moved.newIndex + 1]?.order || 0) + 1)
       }
     },
   },
