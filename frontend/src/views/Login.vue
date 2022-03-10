@@ -4,10 +4,11 @@ import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 
 const router = useRouter();
+const store = useStore();
+
 const email = ref('');
 const password = ref('');
 
-const store = useStore();
 function login() {
   store.dispatch('login', { email: email.value, password: password.value });
 }

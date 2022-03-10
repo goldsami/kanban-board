@@ -35,6 +35,16 @@ export const authModule = {
       context.commit('setToken', data);
       context.dispatch('getUser');
     },
+    async signUp(context, { email, password, name }) {
+      const { data } = await axios
+        .post(`${BACKEND_URL}/sign-up`, {
+          email,
+          password,
+          name
+        });
+      context.commit('setToken', data);
+      context.dispatch('getUser');
+    },
     logout(context) {
       context.commit('setUser', null);
       context.commit('setToken', null);
