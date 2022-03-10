@@ -1,5 +1,7 @@
 <script setup>
-import {computed, onMounted, ref, watch} from 'vue';
+import {
+  computed, onMounted, ref, watch,
+} from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 

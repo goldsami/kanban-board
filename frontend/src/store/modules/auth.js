@@ -40,7 +40,7 @@ export const authModule = {
         .post(`${BACKEND_URL}/sign-up`, {
           email,
           password,
-          name
+          name,
         });
       context.commit('setToken', data);
       context.dispatch('getUser');

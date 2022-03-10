@@ -1,8 +1,7 @@
 <script setup>
-import {ref, watch} from 'vue';
-import {useRouter} from 'vue-router';
-import {useStore} from "vuex";
-import {computed} from "vue/dist/vue";
+import {computed, ref, watch} from 'vue';
+import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
 
 const router = useRouter();
 const store = useStore();
@@ -21,7 +20,7 @@ watch(isAuthenticated, (isAuth) => {
 })
 
 function signup() {
-  store.dispatch('signUp', {email: email.value, password: password.value, name: name.value})
+  store.dispatch('signUp', { email: email.value, password: password.value, name: name.value });
 }
 </script>
 
