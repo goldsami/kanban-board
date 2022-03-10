@@ -49,11 +49,22 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: () => import('../views/Login.vue'),
+    beforeEnter: (to, from, next) => {
+      if (store.getters.isAuthenticated) {
+        next({ name: 'Home' });
+      } else next();
+    },
   },
   {
     path: '/signup',
     name: 'SignUp',
     component: () => import('../views/SignUp.vue'),
+    // todo: refactor (move to separate func)
+    beforeEnter: (to, from, next) => {
+      if (store.getters.isAuthenticated) {
+        next({ name: 'Home' });
+      } else next();
+    },
   },
 ];
 

@@ -15,10 +15,6 @@ import { VueDraggableNext } from 'vue-draggable-next';
 const authMiddleware = new ApolloLink((operation, forward) => {
   store.dispatch('checkToken');
   const { token } = store.state.authModule;
-
-  if (!token) {
-    location.reload();
-  }
   operation.setContext({
     headers: {
       authorization: token ? `Bearer ${token}` : null,
@@ -30,7 +26,6 @@ const authMiddleware = new ApolloLink((operation, forward) => {
 
 const httpLink = createHttpLink({
   uri: `${BACKEND_URL}/graphql`,
-  // uri: 'https://obscure-forest-51635.herokuapp.com/graphql',
 });
 
 const cache = new InMemoryCache();
