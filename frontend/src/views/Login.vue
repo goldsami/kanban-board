@@ -25,11 +25,26 @@ function login() {
 </script>
 
 <template>
-  <div>
-    login page
+  <div class="signup">
+    <h4>Login</h4>
 
-    <input v-model="email" />
-    <input v-model="password" />
-    <button @click="login">Login</button>
+    <input placeholder="email" v-model="email"/>
+    <input placeholder="password" v-model="password"/>
+    <a class="waves-effect waves-light btn-large" @click="login">Login</a>
   </div>
 </template>
+
+<style scoped>
+.signup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 600px;
+  margin: 5rem auto;
+}
+
+.signup a {
+  width: 100%;
+  margin-top: 2rem;
+}
+</style>

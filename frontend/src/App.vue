@@ -1,9 +1,7 @@
 <template>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <div>
     <Navbar></Navbar>
     <router-view />
-  </div>
 </template>
 
 <script>
@@ -18,6 +16,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>
