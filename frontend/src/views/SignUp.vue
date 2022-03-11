@@ -29,9 +29,9 @@ function signup() {
   <div class="signup">
     <h4>Create your account</h4>
 
-    <input placeholder="email" v-model="email"/>
-    <input placeholder="password" v-model="password"/>
     <input placeholder="name" v-model="name"/>
+    <input placeholder="email" v-model="email"/>
+    <input type="password" placeholder="password" v-model="password"/>
     <a class="waves-effect waves-light btn-large" @click="signup">Sign up</a>
   </div>
 </template>

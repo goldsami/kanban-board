@@ -29,7 +29,7 @@ function login() {
     <h4>Login</h4>
 
     <input placeholder="email" v-model="email"/>
-    <input placeholder="password" v-model="password"/>
+    <input type="password" placeholder="password" v-model="password"/>
     <a class="waves-effect waves-light btn-large" @click="login">Login</a>
   </div>
 </template>
