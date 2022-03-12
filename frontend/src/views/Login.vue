@@ -11,13 +11,13 @@ const store = useStore();
 const email = ref('');
 const password = ref('');
 
-const isAuthenticated = computed(() => store.getters.isAuthenticated)
+const isAuthenticated = computed(() => store.getters.isAuthenticated);
 
 watch(isAuthenticated, (isAuth) => {
   if (isAuth) {
     router.replace({ path: '/' });
   }
-})
+});
 
 function login() {
   store.dispatch('login', { email: email.value, password: password.value });
