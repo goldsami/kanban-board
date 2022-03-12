@@ -1,7 +1,8 @@
 <template>
-  <div class="task">
-    {{order}}::{{name}}
-    <span @click="deleteTask" style="padding: 5px">X</span>
+  <div class="task z-depth-1">
+    {{name}}
+<!--    <span @click="deleteTask" style="padding: 5px">X</span>-->
+    <i class="material-icons">more_vert</i>
   </div>
 </template>
 
@@ -26,6 +27,19 @@ export default {
     min-height: 25px;
     background-color: white;
     padding: 10px;
-    margin: 10px;
+    margin: 10px 0;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .task i {
+    position: absolute;
+    top: 4px;
+    right: 1px;
+    display: none;
+  }
+
+  .task:hover i {
+    display: block;
   }
 </style>

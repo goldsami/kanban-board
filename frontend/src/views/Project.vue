@@ -1,5 +1,4 @@
 <script setup>
-import gql from 'graphql-tag';
 import Loader from '@/components/Loader.vue';
 import { useRoute } from 'vue-router';
 import { useStore } from 'vuex';
@@ -39,23 +38,38 @@ onMounted(() => {
 <template>
   <div>
     <Loader v-if="loading"></Loader>
-    <div v-else>Proj: {{ project?.name }}</div>
-    <div class="lists">
-      <draggable group="lists" :list="lists" style="display: flex" @change="dragHandle($event)">
-        <List :id="list.id" :name="list.name" v-for="list of lists" :order="list.order"></List>
-      </draggable>
+    <template v-else>
+      <h5>{{ project?.name }}</h5>
+      <div class="lists">
+        <draggable group="lists" :list="lists" style="display: flex" @change="dragHandle($event)">
+          <List :id="list.id" :name="list.name" v-for="list of lists" :order="list.order"></List>
+        </draggable>
 
-      <div @click="createList({
-        name: 'ls-' + Math.random().toFixed(3).toString(),
-        projectId: project.id
-      })">Add list
+        <!--      @click="createList({-->
+        <!--      name: 'ls-' + Math.random().toFixed(3).toString(),-->
+        <!--      projectId: project.id-->
+        <!--      })"-->
+        <!--      todo: fix styles not to use list classes-->
+        <div class="add-list list-footer list">
+          <i class="material-icons">add</i>
+          <span>Add list</span>
+        </div>
       </div>
-    </div>
+    </template>
   </div>
 </template>
 
 <style scoped>
 .lists {
   display: flex;
+}
+
+.add-list {
+  min-height: unset;
+  height: fit-content;
+}
+
+h5 {
+  margin-left: 2rem;
 }
 </style>

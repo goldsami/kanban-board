@@ -1,13 +1,20 @@
 <template>
   <div class="list">
-    <b>{{order}}:: {{name}}</b><span @click="deleteList" style="padding: 5px">X</span><br>
+    <div class="list-header">
+      <b class="list-name">{{name}}</b>
+      <i class="material-icons" @click="deleteList">clear</i>
+    </div>
     <draggable group="tasks" :list="tasks" @change="dragHandle($event)">
       <Task v-for="task of tasks" :id="task.id" :name="task.name" :order="task.order"></Task>
     </draggable>
-    <button @click="createTask({
+
+    <div class="list-footer" @click="createTask({
     name: `tsk-${Math.random().toFixed(3).toString()}`,
     listId: id
-    })"> + </button>
+    })">
+      <i class="material-icons">add</i>
+      <span>Add task</span>
+    </div>
   </div>
 </template>
 
@@ -55,11 +62,35 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
   .list {
-    width: 200px;
+    width: 250px;
     min-height: 50px;
-    background-color: lightgray;
+    background-color: #eaeaea;
     margin: 10px;
+    padding: 5px 10px;
+  }
+
+  .list-header, .list-footer {
+    display: flex;
+    align-items: center;
+  }
+
+  .list-header {
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .list-footer {
+    cursor: pointer;
+  }
+
+  .list-footer:hover {
+    background-color: #dcdcdc;
+  }
+
+  i, span {
+    color: grey;
+    cursor: pointer;
   }
 </style>
