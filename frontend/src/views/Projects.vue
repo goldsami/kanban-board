@@ -22,7 +22,8 @@ onMounted(() => {
 
 </script>
 <template>
-  <div>
+  <div class="projects-container">
+    <h4>Your projects</h4>
     <Loader v-if="loading"></Loader>
     <div v-else>
       <div class="row">
@@ -40,5 +41,8 @@ onMounted(() => {
   </div>
 </template>
 
-<style>
+<style scoped>
+.projects-container {
+  margin: 2rem;
+}
 </style>

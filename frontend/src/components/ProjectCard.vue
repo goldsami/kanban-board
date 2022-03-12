@@ -37,6 +37,10 @@ export default {
     transition: opacity 500ms;
   }
 
+  .card-content {
+    cursor: pointer;
+  }
+
   .card:hover .close-btn {
     opacity: 1;
   }

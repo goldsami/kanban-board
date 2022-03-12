@@ -19,5 +19,9 @@ export default {
 </script>
 
 <style scoped>
-
+ .preloader-wrapper {
+   position: fixed;
+   top: 30%;
+   left: 50%;
+ }
 </style>

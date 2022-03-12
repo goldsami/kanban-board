@@ -2,7 +2,7 @@
   <nav id="nav" class="teal lighten-2">
     <div class="nav-wrapper">
       <router-link class="brand-logo" to="/">Kanban board</router-link>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <ul id="nav-mobile" class="right">
         <template v-if="!isAuthenticated">
           <li><router-link to="/login">Log in</router-link></li>
           <li>
