@@ -2,7 +2,7 @@
   <div class="list">
     <div class="list-header">
       <b class="list-name">{{name}}</b>
-      <i class="material-icons" @click="deleteList">clear</i>
+      <i class="grey-icon material-icons" @click="deleteList">clear</i>
     </div>
     <draggable group="tasks" :list="tasks" @change="dragHandle($event)">
       <Task v-for="task of tasks" :id="task.id" :name="task.name" :order="task.order"></Task>
@@ -12,7 +12,7 @@
     name: `tsk-${Math.random().toFixed(3).toString()}`,
     listId: id
     })">
-      <i class="material-icons">add</i>
+      <i class="grey-icon material-icons">add</i>
       <span>Add task</span>
     </div>
   </div>
@@ -89,7 +89,7 @@ export default {
     background-color: #dcdcdc;
   }
 
-  i, span {
+  .grey-icon, span {
     color: grey;
     cursor: pointer;
   }

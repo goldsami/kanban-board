@@ -21,4 +21,18 @@ export default {
 html {
   background-color: #fafafa;
 }
+
+#app .modal {
+  display: block;
+  top: 25%;
+  transition: display 2s;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+#app .modal.active {
+  visibility: visible;
+  opacity: 1;
+}
 </style>

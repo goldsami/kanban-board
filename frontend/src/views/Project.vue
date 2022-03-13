@@ -51,7 +51,7 @@ onMounted(() => {
         <!--      })"-->
         <!--      todo: fix styles not to use list classes-->
         <div class="add-list list-footer list">
-          <i class="material-icons">add</i>
+          <i class="grey-icon material-icons">add</i>
           <span>Add list</span>
         </div>
       </div>

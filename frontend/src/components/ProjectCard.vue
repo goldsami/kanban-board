@@ -37,6 +37,10 @@ export default {
     transition: opacity 500ms;
   }
 
+  .card-title {
+    color: black;
+  }
+
   .card-content {
     cursor: pointer;
   }
