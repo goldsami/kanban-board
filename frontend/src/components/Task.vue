@@ -1,12 +1,16 @@
 <template>
   <div class="task z-depth-1">
     {{name}}
-<!--    <span @click="deleteTask" style="padding: 5px">X</span>-->
-    <i class="material-icons">more_vert</i>
+    <i class="material-icons" ref="dropdownTrigger" :data-target='"dropdown-" + id'>more_vert</i>
   </div>
+  <ul :id='"dropdown-" + id' class='dropdown-content'>
+    <li><a @click="deleteTask" href="#!">Delete</a></li>
+  </ul>
 </template>
 
 <script>
+import M from 'materialize-css';
+
 export default {
   name: 'Task',
   props: {
@@ -19,6 +23,9 @@ export default {
       this.$store.dispatch('deleteTask', this.id);
     },
   },
+  mounted() {
+    M.Dropdown.init(this.$refs.dropdownTrigger)
+  }
 };
 </script>
 
