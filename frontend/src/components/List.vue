@@ -8,12 +8,23 @@
       <Task v-for="task of tasks" :id="task.id" :name="task.name" :order="task.order"></Task>
     </draggable>
 
-    <div class="list-footer" @click="createTask({
-    name: `tsk-${Math.random().toFixed(3).toString()}`,
-    listId: id
-    })">
+    <div class="list-footer" @click="showModal = true">
       <i class="grey-icon material-icons">add</i>
       <span>Add task</span>
+    </div>
+  </div>
+
+  <div :class="{active: showModal}" id="modal1" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Create task</h4>
+      </div>
+      <input placeholder="List name" v-model="taskName">
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-yellow btn-flat"
+         @click="showModal = false">Cancel</a>
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat" @click="createTask()">Create</a>
     </div>
   </div>
 </template>
@@ -29,14 +40,24 @@ export default {
     name: String,
     order: Number,
   },
+  data() {
+    return {
+      showModal: false,
+      taskName: '',
+    }
+  },
   computed: {
     tasks() {
       return this.$store.getters.tasksByList(this.id);
     },
   },
   methods: {
-    createTask(createData) {
-      this.$store.dispatch('createTask', createData);
+    createTask() {
+      this.$store.dispatch('createTask', {
+        name: this.taskName,
+        listId: this.id,
+      });
+      this.showModal = false
     },
     deleteList() {
       this.$store.dispatch('deleteList', this.id);
@@ -69,6 +90,7 @@ export default {
     background-color: #eaeaea;
     margin: 10px;
     padding: 5px 10px;
+    height: fit-content;
   }
 
   .list-header, .list-footer {

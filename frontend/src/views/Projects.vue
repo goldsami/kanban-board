@@ -51,6 +51,7 @@ onMounted(() => {
     </div>
   </div>
 
+<!--  todo: refactor - move to separate components-->
   <div :class="{active: showModal}" id="modal1" class="modal">
     <div class="modal-content">
       <div class="modal-header">
