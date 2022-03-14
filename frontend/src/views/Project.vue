@@ -2,7 +2,7 @@
 import Loader from '@/components/Loader.vue';
 import { useRoute } from 'vue-router';
 import { useStore } from 'vuex';
-import {computed, onMounted, ref} from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import List from '@/components/List.vue';
 
 const store = useStore();
@@ -18,14 +18,14 @@ function deleteList(id) {
   store.dispatch('deleteList', id);
 }
 
-const listName = ref('')
+const listName = ref('');
 
 function createList() {
   store.dispatch('createList', {
     name: listName.value,
     projectId: project.value.id,
   });
-  showModal.value = false
+  showModal.value = false;
 }
 
 function updateList(id, data) {

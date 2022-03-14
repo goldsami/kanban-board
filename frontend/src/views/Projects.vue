@@ -1,8 +1,8 @@
 <script setup>
 import ProjectCard from '@/components/ProjectCard.vue';
 import Loader from '@/components/Loader.vue';
-import {computed, onMounted, ref} from 'vue';
-import {useStore} from 'vuex';
+import { computed, onMounted, ref } from 'vue';
+import { useStore } from 'vuex';
 
 import M from 'materialize-css';
 

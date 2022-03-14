@@ -34,13 +34,13 @@
 
 <script>
 import Task from '@/components/Task.vue';
-import useVuelidate from "@vuelidate/core";
-import {required} from "@vuelidate/validators";
+import useVuelidate from '@vuelidate/core';
+import { required } from '@vuelidate/validators';
 
 export default {
   name: 'List',
   components: { Task },
-  setup: () => ({v$: useVuelidate()}),
+  setup: () => ({ v$: useVuelidate() }),
   props: {
     id: String,
     name: String,
@@ -50,12 +50,12 @@ export default {
     return {
       showModal: false,
       taskName: '',
-    }
+    };
   },
   validations() {
     return {
-      taskName: {required}
-    }
+      taskName: { required },
+    };
   },
   computed: {
     tasks() {
@@ -64,14 +64,14 @@ export default {
   },
   methods: {
     async createTask() {
-      const result = await this.v$.$validate()
+      const result = await this.v$.$validate();
       if (!result) return;
 
       this.$store.dispatch('createTask', {
         name: this.taskName,
         listId: this.id,
       });
-      this.showModal = false
+      this.showModal = false;
     },
     deleteList() {
       this.$store.dispatch('deleteList', this.id);

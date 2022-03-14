@@ -24,8 +24,8 @@ export default {
     },
   },
   mounted() {
-    M.Dropdown.init(this.$refs.dropdownTrigger)
-  }
+    M.Dropdown.init(this.$refs.dropdownTrigger);
+  },
 };
 </script>
 
