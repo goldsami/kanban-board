@@ -15,11 +15,14 @@
   </div>
 
   <div :class="{active: showModal}" id="modal1" class="modal">
-    <div class="modal-content">
+    <div class="modal-content" :class="{ error: v$.taskName.$errors.length }">
       <div class="modal-header">
         <h4>Create task</h4>
       </div>
-      <input placeholder="List name" v-model="taskName">
+      <input :class="{invalid: v$.taskName.$errors.length}" placeholder="Task name" v-model="taskName" class="validate">
+      <span v-for="error of v$.taskName.$errors" :key="error.$uid"
+            class="helper-text" :data-error="error.$message" data-success="right">
+      </span>
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-yellow btn-flat"
@@ -31,10 +34,13 @@
 
 <script>
 import Task from '@/components/Task.vue';
+import useVuelidate from "@vuelidate/core";
+import {required} from "@vuelidate/validators";
 
 export default {
   name: 'List',
   components: { Task },
+  setup: () => ({v$: useVuelidate()}),
   props: {
     id: String,
     name: String,
@@ -46,13 +52,21 @@ export default {
       taskName: '',
     }
   },
+  validations() {
+    return {
+      taskName: {required}
+    }
+  },
   computed: {
     tasks() {
       return this.$store.getters.tasksByList(this.id);
     },
   },
   methods: {
-    createTask() {
+    async createTask() {
+      const result = await this.v$.$validate()
+      if (!result) return;
+
       this.$store.dispatch('createTask', {
         name: this.taskName,
         listId: this.id,
