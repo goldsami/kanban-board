@@ -14,33 +14,17 @@
     </div>
   </div>
 
-  <div :class="{active: showModal}" id="modal1" class="modal">
-    <div class="modal-content" :class="{ error: v$.taskName.$errors.length }">
-      <div class="modal-header">
-        <h4>Create task</h4>
-      </div>
-      <input :class="{invalid: v$.taskName.$errors.length}" placeholder="Task name" v-model="taskName" class="validate">
-      <span v-for="error of v$.taskName.$errors" :key="error.$uid"
-            class="helper-text" :data-error="error.$message" data-success="right">
-      </span>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-yellow btn-flat"
-         @click="showModal = false">Cancel</a>
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat" @click="createTask()">Create</a>
-    </div>
-  </div>
+  <CreateTask :visible="showModal" :listId="id" @close="showModal = false"
+  />
 </template>
 
 <script>
 import Task from '@/components/Task.vue';
-import useVuelidate from '@vuelidate/core';
-import { required } from '@vuelidate/validators';
+import CreateTask from '@/components/modals/CreateTask';
 
 export default {
   name: 'List',
-  components: { Task },
-  setup: () => ({ v$: useVuelidate() }),
+  components: { CreateTask, Task },
   props: {
     id: String,
     name: String,
@@ -49,12 +33,6 @@ export default {
   data() {
     return {
       showModal: false,
-      taskName: '',
-    };
-  },
-  validations() {
-    return {
-      taskName: { required },
     };
   },
   computed: {
@@ -63,16 +41,6 @@ export default {
     },
   },
   methods: {
-    async createTask() {
-      const result = await this.v$.$validate();
-      if (!result) return;
-
-      this.$store.dispatch('createTask', {
-        name: this.taskName,
-        listId: this.id,
-      });
-      this.showModal = false;
-    },
     deleteList() {
       this.$store.dispatch('deleteList', this.id);
     },
