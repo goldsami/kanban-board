@@ -13,7 +13,6 @@ import { BACKEND_URL } from '@/config';
 import { VueDraggableNext } from 'vue-draggable-next';
 
 const authMiddleware = new ApolloLink((operation, forward) => {
-  store.dispatch('checkToken');
   const { token } = store.state.authModule;
   operation.setContext({
     headers: {
@@ -42,6 +41,8 @@ const app = createApp({
 
   render: () => h(App),
 });
+
+store.dispatch('checkToken');
 
 app.directive('click-outside', {
   mounted(el, binding) {

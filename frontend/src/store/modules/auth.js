@@ -63,8 +63,14 @@ export const authModule = {
       });
     },
     checkToken(context) {
-      if (context.state.token && jwtDecode(context.state.token).exp < Date.now() / 1000) {
-        context.dispatch('logout');
+      try {
+        const decodedToken = jwtDecode(context.state.token);
+
+        if (decodedToken.exp < Date.now() / 1000) {
+          context.dispatch('logout');
+        }
+      } catch(e) {
+        context.dispatch('logout')
       }
     },
   },
