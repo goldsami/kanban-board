@@ -21,19 +21,24 @@ export const authModule = {
       store.user = value;
     },
     setToken(store, value) {
+      console.log('set tok', value)
       localStorage.setItem('token', value || '');
       store.token = value || '';
     },
   },
   actions: {
+    async initializeStore(context) {
+      await context.commit('initializeStore')
+      return context.dispatch('checkToken')
+    },
     async login(context, { email, password }) {
       const { data } = await axios
         .post(`${BACKEND_URL}/login`, {
           email,
           password,
         });
-      context.commit('setToken', data);
-      context.dispatch('getUser');
+      await context.commit('setToken', data);
+      return context.dispatch('getUser');
     },
     async signUp(context, { email, password, name }) {
       const { data } = await axios
@@ -42,8 +47,8 @@ export const authModule = {
           password,
           name,
         });
-      context.commit('setToken', data);
-      context.dispatch('getUser');
+      await context.commit('setToken', data);
+      return context.dispatch('getUser');
     },
     logout(context) {
       context.commit('setUser', null);
@@ -65,7 +70,6 @@ export const authModule = {
     checkToken(context) {
       try {
         const decodedToken = jwtDecode(context.state.token);
-
         if (decodedToken.exp < Date.now() / 1000) {
           context.dispatch('logout');
         }

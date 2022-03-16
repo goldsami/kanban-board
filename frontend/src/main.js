@@ -42,8 +42,6 @@ const app = createApp({
   render: () => h(App),
 });
 
-store.dispatch('checkToken');
-
 app.directive('click-outside', {
   mounted(el, binding) {
     el.clickOutsideEvent = () => {
