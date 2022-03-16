@@ -21,15 +21,15 @@ export const authModule = {
       store.user = value;
     },
     setToken(store, value) {
-      console.log('set tok', value)
+      console.log('set tok', value);
       localStorage.setItem('token', value || '');
       store.token = value || '';
     },
   },
   actions: {
     async initializeStore(context) {
-      await context.commit('initializeStore')
-      return context.dispatch('checkToken')
+      await context.commit('initializeStore');
+      return context.dispatch('checkToken');
     },
     async login(context, { email, password }) {
       const { data } = await axios
@@ -73,8 +73,8 @@ export const authModule = {
         if (decodedToken.exp < Date.now() / 1000) {
           context.dispatch('logout');
         }
-      } catch(e) {
-        context.dispatch('logout')
+      } catch (e) {
+        context.dispatch('logout');
       }
     },
   },

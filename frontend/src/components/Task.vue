@@ -13,11 +13,11 @@
 
 <script>
 import M from 'materialize-css';
-import UpdateTask from "@/components/modals/task/UpdateTask";
+import UpdateTask from '@/components/modals/task/UpdateTask';
 
 export default {
   name: 'Task',
-  components: {UpdateTask},
+  components: { UpdateTask },
   props: {
     id: String,
     name: String,
@@ -25,8 +25,8 @@ export default {
   },
   data() {
     return {
-      showUpdateModal: false
-    }
+      showUpdateModal: false,
+    };
   },
   methods: {
     deleteTask() {

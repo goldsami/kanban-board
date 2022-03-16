@@ -46,7 +46,7 @@ export default {
         listId: this.listId,
       });
 
-      this.taskName = ''
+      this.taskName = '';
       this.$emit('close');
     },
   },

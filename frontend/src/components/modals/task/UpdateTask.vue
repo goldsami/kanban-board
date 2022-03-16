@@ -25,7 +25,7 @@ export default {
   props: {
     visible: Boolean,
     id: String,
-    taskName: String
+    taskName: String,
   },
   validations() {
     return {
@@ -41,7 +41,7 @@ export default {
         id: this.id,
         data: {
           name: this.taskName,
-        }
+        },
       });
 
       this.$emit('close');

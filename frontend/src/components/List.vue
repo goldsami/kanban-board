@@ -26,12 +26,12 @@
 <script>
 import Task from '@/components/Task.vue';
 import CreateTask from '@/components/modals/task/CreateTask';
-import M from "materialize-css";
-import UpdateList from "@/components/modals/list/UpdateList";
+import M from 'materialize-css';
+import UpdateList from '@/components/modals/list/UpdateList';
 
 export default {
   name: 'List',
-  components: {UpdateList, CreateTask, Task },
+  components: { UpdateList, CreateTask, Task },
   props: {
     id: String,
     name: String,
@@ -40,7 +40,7 @@ export default {
   data() {
     return {
       showCreateTaskModal: false,
-      showUpdateModal: false
+      showUpdateModal: false,
     };
   },
   computed: {
