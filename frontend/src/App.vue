@@ -36,4 +36,8 @@ html {
   visibility: visible;
   opacity: 1;
 }
+
+i {
+  cursor: pointer;
+}
 </style>

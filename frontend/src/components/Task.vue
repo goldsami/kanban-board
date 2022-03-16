@@ -4,11 +4,11 @@
     <i class="material-icons" ref="dropdownTrigger" :data-target='"dropdown-" + id'>more_vert</i>
   </div>
   <ul :id='"dropdown-" + id' class='dropdown-content'>
-    <li><a @click="showModal = true" href="#!">Update</a></li>
+    <li><a @click="showUpdateModal = true" href="#!">Update</a></li>
     <li><a @click="deleteTask" href="#!">Delete</a></li>
   </ul>
 
-  <UpdateTask :visible="showModal" :id="id" :taskName="name" @close="showModal = false"></UpdateTask>
+  <UpdateTask :visible="showUpdateModal" :id="id" :taskName="name" @close="showUpdateModal = false"></UpdateTask>
 </template>
 
 <script>
@@ -25,7 +25,7 @@ export default {
   },
   data() {
     return {
-      showModal: false
+      showUpdateModal: false
     }
   },
   methods: {

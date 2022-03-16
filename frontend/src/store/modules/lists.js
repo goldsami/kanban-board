@@ -48,8 +48,9 @@ export const listsModule = {
       ListService.delete(id).then(() => context.commit('deleteList', id)).catch(console.error);
     },
     updateList(context, { id, data }) {
+      context.commit('upsertList', { id, ...data });
+
       if ('order' in data) {
-        context.commit('upsertList', { id, ...data });
         context.commit('increaseOrderFrom', { order: data.order, except: id });
       }
       ListService.update(id, data).catch(console.error);
