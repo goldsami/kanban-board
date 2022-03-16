@@ -39,9 +39,8 @@ export const tasksModule = {
       TaskService.delete(id).then(() => context.commit('deleteTask', id)).catch(console.error);
     },
     updateTask(context, { id, data }) {
-      if ('listId' in data || 'order' in data) {
-        context.commit('upsertTask', { id, ...data });
-      }
+      context.commit('upsertTask', { id, ...data });
+
       if ('order' in data) {
         context.commit('increaseOrderFrom', { order: data.order, except: id });
       }

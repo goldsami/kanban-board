@@ -20,7 +20,7 @@
 
 <script>
 import Task from '@/components/Task.vue';
-import CreateTask from '@/components/modals/CreateTask';
+import CreateTask from '@/components/modals/task/CreateTask';
 
 export default {
   name: 'List',

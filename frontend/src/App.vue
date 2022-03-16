@@ -12,7 +12,7 @@ export default {
   components: { Navbar },
   mounted() {
     M.AutoInit();
-    this.$store.commit('initializeStore');
+    this.$store.dispatch('initializeStore');
   },
 };
 </script>
@@ -23,6 +23,7 @@ html {
 }
 
 #app .modal {
+  z-index: 1;
   display: block;
   top: 25%;
   transition: display 2s;
