@@ -35,8 +35,7 @@ onMounted(() => {
     <div v-else>
       <div class="row">
         <ProjectCard
-                     :key="index" v-for="(proj, index) in projects"
-                     @click="() => $router.push(`/projects/${proj.id}`)" :id="proj.id" :title="proj.name">
+                     :key="index" v-for="(proj, index) in projects" :id="proj.id" :title="proj.name">
 
         </ProjectCard>
         <div class="col add-project" @click="showModal=true">
@@ -47,7 +46,7 @@ onMounted(() => {
     </div>
   </div>
 
-  <CreateProject :visible="showModal"></CreateProject>
+  <CreateProject :visible="showModal" @close="showModal=false"></CreateProject>
 </template>
 
 <style scoped>
