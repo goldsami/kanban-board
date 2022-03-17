@@ -12,7 +12,7 @@
       <Task v-for="task of tasks" :id="task.id" :name="task.name" :order="task.order"></Task>
     </draggable>
 
-    <div class="list-footer" @click="showCreateTaskModal = true">
+    <div class="list-footer" @click="toggleCreateTaskModal()">
       <i class="grey-icon material-icons">add</i>
       <span>Add task</span>
     </div>
@@ -52,6 +52,9 @@ export default {
     M.Dropdown.init(this.$refs.dropdownTrigger);
   },
   methods: {
+    toggleCreateTaskModal() {
+      this.showCreateTaskModal = !this.showCreateTaskModal
+    },
     deleteList() {
       this.$store.dispatch('deleteList', this.id);
     },

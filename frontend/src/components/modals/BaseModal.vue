@@ -1,5 +1,5 @@
 <template>
-  <div :class="{active: visible}" id="modal1" class="modal">
+  <div v-if="visible" :class="{active: visible}" id="modal1" class="modal">
     <div class="modal-content">
       <div class="modal-header">
         <h4>{{title}}</h4>
