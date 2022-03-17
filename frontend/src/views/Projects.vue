@@ -39,7 +39,7 @@ onMounted(() => {
                      @click="() => $router.push(`/projects/${proj.id}`)" :id="proj.id" :title="proj.name">
 
         </ProjectCard>
-        <div class="card col s6 m3 add-project" @click="showModal=true">
+        <div class="col add-project" @click="showModal=true">
           <i class="medium material-icons">add</i>
         </div>
 
@@ -56,12 +56,17 @@ onMounted(() => {
 }
 
 .add-project {
-  width: fit-content !important;
-  margin-left: 0.75rem !important;
-  background-color: lightgray;
+  width: fit-content;
+  margin: 8px;
 }
 
 .add-project i {
   padding: 16px;
+  transition: background-color 200ms;
+  border-radius: 50%;
+}
+
+.add-project:hover i {
+  background-color: lightblue;
 }
 </style>
