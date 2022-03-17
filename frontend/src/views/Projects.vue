@@ -5,6 +5,7 @@ import { computed, onMounted, ref } from 'vue';
 import { useStore } from 'vuex';
 
 import M from 'materialize-css';
+import CreateProject from '@/components/modals/project/CreateProject';
 
 const store = useStore();
 
@@ -14,10 +15,6 @@ const loading = computed(() => store.state.projectsModule.isLoading);
 const projects = computed(() => store.state.projectsModule.projects);
 
 const projectName = ref('');
-
-function deleteProject(id) {
-  store.dispatch('deleteProject', id);
-}
 
 function createProject() {
   store.dispatch('createProject', {
@@ -37,38 +34,34 @@ onMounted(() => {
     <Loader v-if="loading"></Loader>
     <div v-else>
       <div class="row">
-        <ProjectCard @close="deleteProject(proj.id)"
+        <ProjectCard
                      :key="index" v-for="(proj, index) in projects"
-                     @click="() => $router.push(`/projects/${proj.id}`)" :title="proj.name">
+                     @click="() => $router.push(`/projects/${proj.id}`)" :id="proj.id" :title="proj.name">
 
         </ProjectCard>
-        <!--        @click="createProject({-->
-        <!--        name: 'proj-' + Math.random().toFixed(5)-->
-        <!--        })"-->
-        <ProjectCard @click="showModal = true" title="Add project" type="secondary"></ProjectCard>
+        <div class="card col s6 m3 add-project" @click="showModal=true">
+          <i class="medium material-icons">add</i>
+        </div>
 
       </div>
     </div>
   </div>
 
-<!--  todo: refactor - move to separate components-->
-  <div :class="{active: showModal}" id="modal1" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4>Create project</h4>
-      </div>
-      <input placeholder="Project name" v-model="projectName">
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-yellow btn-flat"
-         @click="showModal = false">Cancel</a>
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat" @click="createProject()">Create</a>
-    </div>
-  </div>
+  <CreateProject :visible="showModal"></CreateProject>
 </template>
 
 <style scoped>
 .projects-container {
   margin: 2rem;
+}
+
+.add-project {
+  width: fit-content !important;
+  margin-left: 0.75rem !important;
+  background-color: lightgray;
+}
+
+.add-project i {
+  padding: 16px;
 }
 </style>

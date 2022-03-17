@@ -40,4 +40,10 @@ html {
 i {
   cursor: pointer;
 }
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 </style>

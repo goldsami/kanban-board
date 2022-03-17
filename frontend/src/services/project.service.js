@@ -1,9 +1,10 @@
 import { apolloClient } from '@/main';
+import { UpdateListMutation } from '@/services/queries/list.query';
 import {
   CreateProjectMutation,
   DeleteProjectMutation,
   ProjectQuery,
-  ProjectsQuery,
+  ProjectsQuery, UpdateProjectMutation,
 } from './queries/project.query';
 
 export class ProjectService {
@@ -44,5 +45,17 @@ export class ProjectService {
     });
 
     return result.data.createProject;
+  }
+
+  static async update(id, data) {
+    const result = await apolloClient.mutate({
+      mutation: UpdateProjectMutation,
+      variables: {
+        id,
+        data,
+      },
+    });
+
+    return result.data.updateProject;
   }
 }

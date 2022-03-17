@@ -1,4 +1,5 @@
 import { ProjectService } from '@/services/project.service';
+import { ListService } from '@/services/list.service';
 
 export const projectsModule = {
   state() {
@@ -19,6 +20,14 @@ export const projectsModule = {
     },
     deleteProject(store, id) {
       store.projects = store.projects.filter((x) => x.id !== id);
+    },
+    upsertProject(store, project) {
+      const index = store.projects.findIndex((x) => x.id === project.id);
+      if (!(index + 1)) {
+        store.projects.push(project);
+      } else {
+        store.projects[index] = { ...store.projects[index], ...project };
+      }
     },
   },
   actions: {
@@ -42,6 +51,10 @@ export const projectsModule = {
     },
     deleteProject(context, id) {
       ProjectService.delete(id).then(() => context.commit('deleteProject', id)).catch(console.error);
+    },
+    updateProject(context, { id, data }) {
+      context.commit('upsertList', { id, ...data });
+      ProjectService.update(id, data).catch(console.error);
     },
   },
   getters: {

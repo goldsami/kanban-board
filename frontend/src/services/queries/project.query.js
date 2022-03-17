@@ -47,3 +47,12 @@ export const DeleteProjectMutation = gql`
     }
   }
 `;
+
+export const UpdateProjectMutation = gql`
+  mutation UpdateProject($id: String!, $data: CreateProjectType!) {
+    updateProject(id: $id, data: $data){
+      id
+      name
+    }
+  }
+`;
