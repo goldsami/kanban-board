@@ -9,6 +9,6 @@ export const updateProjectMutation = {
     data: { type: CreateProjectType },
   },
   resolve: (_, { id, data }, context) => {
-    return updateProjectUseCase(id, data, context.userId);
+    return updateProjectUseCase(id, context.userId, data);
   },
 };
