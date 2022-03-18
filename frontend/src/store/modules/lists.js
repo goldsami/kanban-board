@@ -1,6 +1,4 @@
 import { ListService } from '@/services/list.service';
-import { TaskService } from '@/services/task.service';
-
 export const listsModule = {
   state() {
     return {
@@ -26,18 +24,16 @@ export const listsModule = {
         store.lists[index] = { ...store.lists[index], ...list };
       }
     },
-    increaseOrderFrom(store, { order, except }) {
-      store.lists.filter((x) => x.order >= order).forEach((x, index) => {
-        if (except !== x.id) {
-          store.lists[index] = { ...store.lists[index], order: store.lists[index].order + 1 };
-        }
-      });
-    },
   },
   actions: {
     setLists(context, lists) {
       context.commit('setTasks', lists.map((x) => x.tasks).flat());
       context.commit('setLists', lists.map((x) => ({ ...x, tasks: x.tasks.map((t) => t.id) })));
+    },
+    getLists(context, projectId) {
+      ListService.get(projectId).then(lists =>
+        lists.forEach(l => context.commit('upsertList', l))
+      ).catch(console.error)
     },
     createList(context, createData) {
       ListService.create(createData).then((lists) => {
@@ -50,10 +46,9 @@ export const listsModule = {
     updateList(context, { id, data }) {
       context.commit('upsertList', { id, ...data });
 
-      if ('order' in data) {
-        context.commit('increaseOrderFrom', { order: data.order, except: id });
-      }
-      ListService.update(id, data).catch(console.error);
+      ListService.update(id, data).then(list => {
+        return context.dispatch('getLists', list.projectId)
+      }).catch(console.error);
     },
   },
   getters: {

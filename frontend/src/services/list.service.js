@@ -1,12 +1,21 @@
 import { apolloClient } from '@/main';
 import {
   CreateListMutation,
-  DeleteListMutation,
+  DeleteListMutation, ListsQuery,
   UpdateListMutation,
 } from '@/services/queries/list.query';
-import { UpdateTaskMutation } from '@/services/queries/task.query';
 
 export class ListService {
+  static async get(projectId) {
+    const result = await apolloClient.query({
+      query: ListsQuery,
+      variables: {
+        projectId
+      }
+    });
+
+    return result.data.lists;
+  }
   static delete(id) {
     return apolloClient.mutate({
       mutation: DeleteListMutation,

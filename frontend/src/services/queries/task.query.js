@@ -1,5 +1,16 @@
 import gql from 'graphql-tag';
 
+export const TasksQuery = gql`
+  query Tasks($listId: String!) {
+    tasks(listId: $listId){
+      id
+      name
+      order
+      listId
+    }
+  }
+`;
+
 export const CreateTaskMutation = gql`
   mutation CreateTask($data: CreateTaskType!) {
     createTask(data: $data){

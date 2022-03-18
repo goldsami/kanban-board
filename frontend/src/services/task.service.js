@@ -1,11 +1,22 @@
 import {
   CreateTaskMutation,
-  DeleteTaskMutation,
+  DeleteTaskMutation, TasksQuery,
   UpdateTaskMutation,
 } from '@/services/queries/task.query';
 import { apolloClient } from '@/main';
 
 export class TaskService {
+  static async get(listId) {
+    const result = await apolloClient.query({
+      query: TasksQuery,
+      variables: {
+        listId
+      }
+    });
+
+    return result.data.tasks;
+  }
+
   static delete(id) {
     return apolloClient.mutate({
       mutation: DeleteTaskMutation,
