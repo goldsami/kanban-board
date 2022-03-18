@@ -10,12 +10,13 @@ export class ListService {
     const result = await apolloClient.query({
       query: ListsQuery,
       variables: {
-        projectId
-      }
+        projectId,
+      },
     });
 
     return result.data.lists;
   }
+
   static delete(id) {
     return apolloClient.mutate({
       mutation: DeleteListMutation,

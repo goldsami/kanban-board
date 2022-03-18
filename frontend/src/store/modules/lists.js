@@ -1,4 +1,5 @@
 import { ListService } from '@/services/list.service';
+
 export const listsModule = {
   state() {
     return {
@@ -31,9 +32,7 @@ export const listsModule = {
       context.commit('setLists', lists.map((x) => ({ ...x, tasks: x.tasks.map((t) => t.id) })));
     },
     getLists(context, projectId) {
-      ListService.get(projectId).then(lists =>
-        lists.forEach(l => context.commit('upsertList', l))
-      ).catch(console.error)
+      ListService.get(projectId).then((lists) => lists.forEach((l) => context.commit('upsertList', l))).catch(console.error);
     },
     createList(context, createData) {
       ListService.create(createData).then((lists) => {
@@ -46,9 +45,7 @@ export const listsModule = {
     updateList(context, { id, data }) {
       context.commit('upsertList', { id, ...data });
 
-      ListService.update(id, data).then(list => {
-        return context.dispatch('getLists', list.projectId)
-      }).catch(console.error);
+      ListService.update(id, data).then((list) => context.dispatch('getLists', list.projectId)).catch(console.error);
     },
   },
   getters: {

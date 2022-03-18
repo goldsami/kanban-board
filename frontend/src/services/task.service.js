@@ -10,8 +10,8 @@ export class TaskService {
     const result = await apolloClient.query({
       query: TasksQuery,
       variables: {
-        listId
-      }
+        listId,
+      },
     });
 
     return result.data.tasks;

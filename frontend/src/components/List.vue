@@ -53,7 +53,7 @@ export default {
   },
   methods: {
     toggleCreateTaskModal() {
-      this.showCreateTaskModal = !this.showCreateTaskModal
+      this.showCreateTaskModal = !this.showCreateTaskModal;
     },
     deleteList() {
       this.$store.dispatch('deleteList', this.id);
