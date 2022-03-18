@@ -5,10 +5,10 @@ import { TaskType } from '../../types';
 export const tasksQuery = {
   type: new GraphQLList(TaskType),
   args: {
-    projectId: { type: new GraphQLNonNull(GraphQLString) }
+    listId: { type: new GraphQLNonNull(GraphQLString) }
   },
   description: 'List of all Tasks',
-  resolve(_, { projectId }) {
-    return getTasksUseCase(projectId);
+  resolve(_, { listId }) {
+    return getTasksUseCase(listId);
   },
 };
