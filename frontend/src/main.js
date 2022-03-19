@@ -5,12 +5,12 @@ import {
 import {
   provideApolloClient,
 } from '@vue/apollo-composable';
-import App from './App.vue';
+import { VueDraggableNext } from 'vue-draggable-next';
 import router from './router';
 import { store } from './store';
 import 'materialize-css/dist/css/materialize.min.css';
 import { BACKEND_URL } from '@/config';
-import { VueDraggableNext } from 'vue-draggable-next';
+import App from './App.vue';
 
 const authMiddleware = new ApolloLink((operation, forward) => {
   const { token } = store.state.authModule;

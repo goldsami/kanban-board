@@ -1,6 +1,6 @@
 <script setup>
 import {
-  computed, onMounted, ref, watch,
+  computed, ref, watch,
 } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
@@ -33,6 +33,3 @@ function login() {
     <a class="waves-effect waves-light btn-large" @click="login">Login</a>
   </div>
 </template>
-
-<style scoped>
-</style>

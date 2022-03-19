@@ -14,10 +14,6 @@ const loading = computed(() => store.state.projectsModule.isLoading);
 const project = computed(() => store.getters.project(route.params.id));
 const lists = computed(() => store.getters.listsByProject(project?.value?.id));
 
-function deleteList(id) {
-  store.dispatch('deleteList', id);
-}
-
 const listName = ref('');
 
 function createList() {
@@ -33,7 +29,9 @@ function updateList(id, data) {
 }
 
 function dragHandle(event) {
-  const newOrder = lists.value[event.moved.newIndex + 1]?.order || (lists.value[lists.value.length - 2].order + 1);
+  const newOrder = lists.value[event.moved.newIndex + 1]?.order
+    || (lists.value[lists.value.length - 2].order + 1);
+
   updateList(event.moved.element.id, { order: newOrder });
 }
 
@@ -50,7 +48,9 @@ onMounted(() => {
       <h5 class="project-name">{{ project?.name }}</h5>
       <div class="lists">
         <draggable group="lists" :list="lists" style="display: flex" @change="dragHandle($event)">
-          <List :id="list.id" :name="list.name" v-for="list of lists" :order="list.order"></List>
+          <List :id="list.id" :key="list.id" :name="list.name"
+                v-for="list of lists" :order="list.order">
+          </List>
         </draggable>
 
         <!--      todo: fix styles not to use list classes-->
@@ -72,7 +72,9 @@ onMounted(() => {
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-yellow btn-flat"
          @click="showModal = false">Cancel</a>
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat" @click="createList()">Create</a>
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat" @click="createList()">
+        Create
+      </a>
     </div>
   </div>
 </template>

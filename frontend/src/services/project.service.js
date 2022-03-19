@@ -1,5 +1,4 @@
 import { apolloClient } from '@/main';
-import { UpdateListMutation } from '@/services/queries/list.query';
 import {
   CreateProjectMutation,
   DeleteProjectMutation,

@@ -3,9 +3,7 @@ import ProjectCard from '@/components/ProjectCard.vue';
 import Loader from '@/components/Loader.vue';
 import { computed, onMounted, ref } from 'vue';
 import { useStore } from 'vuex';
-
-import M from 'materialize-css';
-import CreateProject from '@/components/modals/project/CreateProject';
+import CreateProject from '@/components/modals/project/CreateProject.vue';
 
 const store = useStore();
 
@@ -13,15 +11,6 @@ const showModal = ref(false);
 
 const loading = computed(() => store.state.projectsModule.isLoading);
 const projects = computed(() => store.state.projectsModule.projects);
-
-const projectName = ref('');
-
-function createProject() {
-  store.dispatch('createProject', {
-    name: projectName.value,
-  });
-  showModal.value = !showModal.value;
-}
 
 onMounted(() => {
   store.dispatch('getProjects');
@@ -34,9 +23,8 @@ onMounted(() => {
     <Loader v-if="loading"></Loader>
     <div v-else>
       <div class="row">
-        <ProjectCard
-                     :key="index" v-for="(proj, index) in projects" :id="proj.id" :title="proj.name">
-
+        <ProjectCard :key="index" v-for="(proj, index) in projects"
+                     :id="proj.id" :title="proj.name">
         </ProjectCard>
         <div class="col add-project" @click="showModal=true">
           <i class="medium material-icons">add</i>

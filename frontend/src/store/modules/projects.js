@@ -1,5 +1,4 @@
 import { ProjectService } from '@/services/project.service';
-import { ListService } from '@/services/list.service';
 
 export const projectsModule = {
   state() {
