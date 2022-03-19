@@ -33,12 +33,12 @@ const store = useStore();
 const isAuthenticated = computed(() => store.getters.isAuthenticated);
 const user = computed(() => store.state.authModule.user);
 
+const dropdownTrigger = ref(null);
+
 function logout() {
   store.dispatch('logout');
   location.reload();
 }
-
-const dropdownTrigger = ref(null);
 
 onMounted(() => {
   M.Dropdown.init(dropdownTrigger);

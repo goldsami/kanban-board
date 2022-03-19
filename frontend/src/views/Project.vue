@@ -10,11 +10,11 @@ const route = useRoute();
 
 const showModal = ref(false);
 
+const listName = ref('');
+
 const loading = computed(() => store.state.projectsModule.isLoading);
 const project = computed(() => store.getters.project(route.params.id));
 const lists = computed(() => store.getters.listsByProject(project?.value?.id));
-
-const listName = ref('');
 
 function createList() {
   store.dispatch('createList', {

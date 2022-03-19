@@ -1,5 +1,3 @@
-<script>
-</script>
 <template>
   <div class="home">
     <h2>Welcome to Kanban board</h2>

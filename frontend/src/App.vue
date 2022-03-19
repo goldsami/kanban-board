@@ -1,11 +1,3 @@
-<template>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <Navbar></Navbar>
-  <div class="content">
-    <router-view/>
-  </div>
-</template>
-
 <script>
 import M from 'materialize-css';
 import Navbar from '@/components/Navbar.vue';
@@ -18,6 +10,14 @@ export default {
   },
 };
 </script>
+
+<template>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <Navbar></Navbar>
+  <div class="content">
+    <router-view/>
+  </div>
+</template>
 
 <style>
 html {
