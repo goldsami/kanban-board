@@ -16,7 +16,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 5rem;
+    margin: 5rem 1rem;
+  }
+
+  .home h2 {
+    text-align: center;
   }
 
   a {

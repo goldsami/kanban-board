@@ -81,7 +81,7 @@ export default {
 
 <style>
   .list {
-    width: 250px;
+    min-width: 250px;
     min-height: 50px;
     background-color: #eaeaea;
     margin: 10px;

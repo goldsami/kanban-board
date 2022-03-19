@@ -1,9 +1,9 @@
 <template>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <Navbar></Navbar>
-    <div class="content">
-      <router-view />
-    </div>
+  <Navbar></Navbar>
+  <div class="content">
+    <router-view/>
+  </div>
 </template>
 
 <script>
@@ -11,7 +11,7 @@ import M from 'materialize-css';
 import Navbar from '@/components/Navbar.vue';
 
 export default {
-  components: { Navbar },
+  components: {Navbar},
   mounted() {
     M.AutoInit();
     this.$store.dispatch('initializeStore');
@@ -48,6 +48,32 @@ html {
 #app .modal.active {
   visibility: visible;
   opacity: 1;
+}
+
+#app .brand-logo {
+  left: 0 !important;
+  transform: none !important;
+}
+
+
+.signup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 600px;
+  margin: 5rem auto;
+}
+
+.signup a {
+  width: 100%;
+  margin-top: 2rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .signup {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
 }
 
 i {

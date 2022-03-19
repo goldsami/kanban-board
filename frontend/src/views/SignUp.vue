@@ -37,16 +37,4 @@ function signup() {
 </template>
 
 <style scoped>
-  .signup {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 600px;
-    margin: 5rem auto;
-  }
-
-  .signup a {
-    width: 100%;
-    margin-top: 2rem;
-  }
 </style>

@@ -92,5 +92,7 @@ onMounted(() => {
 .add-list {
   min-height: unset;
   height: fit-content;
+  display: flex;
+  flex-direction: row;
 }
 </style>
