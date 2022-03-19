@@ -11,7 +11,7 @@ import M from 'materialize-css';
 import Navbar from '@/components/Navbar.vue';
 
 export default {
-  components: {Navbar},
+  components: { Navbar },
   mounted() {
     M.AutoInit();
     this.$store.dispatch('initializeStore');
@@ -54,7 +54,6 @@ html {
   left: 0 !important;
   transform: none !important;
 }
-
 
 .signup {
   display: flex;

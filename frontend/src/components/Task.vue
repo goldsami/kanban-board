@@ -35,7 +35,7 @@ export default {
   },
   mounted() {
     M.Dropdown.init(this.$refs.dropdownTrigger, {
-      alignment: 'right'
+      alignment: 'right',
     });
   },
 };
