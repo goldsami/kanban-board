@@ -34,7 +34,9 @@ export default {
     },
   },
   mounted() {
-    M.Dropdown.init(this.$refs.dropdownTrigger);
+    M.Dropdown.init(this.$refs.dropdownTrigger, {
+      alignment: 'right'
+    });
   },
 };
 </script>
@@ -47,6 +49,10 @@ export default {
     margin: 10px 0;
     cursor: pointer;
     position: relative;
+  }
+
+  .dropdown-content {
+    position: absolute;
   }
 
   .task i {

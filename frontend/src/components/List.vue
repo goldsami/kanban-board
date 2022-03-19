@@ -8,7 +8,7 @@
       <li><a @click="showUpdateModal = true" href="#!">Update</a></li>
       <li><a @click="deleteList" href="#!">Delete</a></li>
     </ul>
-    <draggable group="tasks" :list="tasks" @change="dragHandle($event)">
+    <draggable class="tasks" group="tasks" :list="tasks" @change="dragHandle($event)">
       <Task v-for="task of tasks" :id="task.id" :name="task.name" :order="task.order"></Task>
     </draggable>
 
@@ -87,11 +87,18 @@ export default {
     margin: 10px;
     padding: 5px 10px;
     height: fit-content;
+    max-height: 95%;
+    display: flex;
+    flex-direction: column;
   }
 
   .list-header, .list-footer {
     display: flex;
     align-items: center;
+  }
+
+  .tasks {
+    overflow-y: scroll;
   }
 
   .list-header {

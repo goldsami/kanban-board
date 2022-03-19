@@ -1,7 +1,9 @@
 <template>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <Navbar></Navbar>
-    <router-view />
+    <div class="content">
+      <router-view />
+    </div>
 </template>
 
 <script>
@@ -22,6 +24,12 @@ html {
   background-color: #fafafa;
 }
 
+#app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 #app .modal {
   z-index: 1;
   display: block;
@@ -30,6 +38,11 @@ html {
   visibility: hidden;
   opacity: 0;
   transition: opacity 200ms;
+}
+
+#app .content {
+  flex-grow: 1;
+  height: calc(100% - 64px);
 }
 
 #app .modal.active {

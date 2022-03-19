@@ -45,7 +45,6 @@ export default {
         name: this.projectName,
       });
 
-      this.projectName = '';
       this.$emit('close');
     },
   },

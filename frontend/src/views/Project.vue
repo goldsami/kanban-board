@@ -44,10 +44,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
+  <div style="height: 100%">
     <Loader v-if="loading"></Loader>
     <template v-else>
-      <h5>{{ project?.name }}</h5>
+      <h5 class="project-name">{{ project?.name }}</h5>
       <div class="lists">
         <draggable group="lists" :list="lists" style="display: flex" @change="dragHandle($event)">
           <List :id="list.id" :name="list.name" v-for="list of lists" :order="list.order"></List>
@@ -80,14 +80,17 @@ onMounted(() => {
 <style scoped>
 .lists {
   display: flex;
+  overflow-x: scroll;
+  height: calc(100% - 50px);
+}
+
+.project-name {
+  padding: 16px 0 8px 2rem;
+  margin: 0;
 }
 
 .add-list {
   min-height: unset;
   height: fit-content;
-}
-
-h5 {
-  margin-left: 2rem;
 }
 </style>
