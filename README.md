@@ -4,6 +4,10 @@ Tool for tasks and projects management.
 You can find it on
 [this url](https://goldsami-kanban-board.netlify.app)
 
+## Tech stack
+
+Vue, TS, Express, Firebase
+
 ## Setup 
 
 Project consists of two subprojects _backend_ 
