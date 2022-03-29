@@ -46,6 +46,7 @@ html {
 }
 
 #app .modal.active {
+  z-index: 2;
   visibility: visible;
   opacity: 1;
 }

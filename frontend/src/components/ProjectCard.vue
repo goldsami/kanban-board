@@ -5,7 +5,7 @@
       <a @click.stop ref="dropdownTrigger" :data-target='"dropdown-" + id'
          class="close-btn btn-small btn-floating waves-effect waves-light grey">
         <i class="material-icons">more_vert</i></a>
-      <ul :id='"dropdown-" + id' class='dropdown-content'>
+      <ul @click.stop :id='"dropdown-" + id' class='dropdown-content'>
         <li><a @click="showUpdateModal = true" href="#!">Update</a></li>
         <li><a @click="deleteProject()" href="#">Delete</a></li>
       </ul>
@@ -17,7 +17,7 @@
     </div>
   </div>
 
-  <UpdateProject :id="id" :visible="showUpdateModal" :projectName="title"></UpdateProject>
+  <UpdateProject :id="id" :visible="showUpdateModal" @close="showUpdateModal = false" :projectName="title"></UpdateProject>
 </template>
 
 <script>

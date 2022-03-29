@@ -8,8 +8,7 @@
       </span>
     </template>
     <template v-slot:footer>
-      <a href="#!" class="modal-close waves-effect waves-yellow btn-flat"
-         @click="visible = false">Cancel</a>
+      <a @click="$emit('close')">Cancel</a>
       <a href="#!" class="modal-close waves-effect waves-green btn-flat" @click="create()">
         Create
       </a>
