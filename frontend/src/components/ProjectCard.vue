@@ -2,7 +2,7 @@
   <div class="col s6 m3"
        @click="() => $router.push(`/projects/${id}`)">
     <div class="card teal lighten-5">
-      <a @click.prevent ref="dropdownTrigger" :data-target='"dropdown-" + id'
+      <a @click.stop ref="dropdownTrigger" :data-target='"dropdown-" + id'
          class="close-btn btn-small btn-floating waves-effect waves-light grey">
         <i class="material-icons">more_vert</i></a>
       <ul :id='"dropdown-" + id' class='dropdown-content'>

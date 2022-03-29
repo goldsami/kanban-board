@@ -98,7 +98,7 @@ export default {
   }
 
   .tasks {
-    overflow-y: scroll;
+    overflow-y: auto;
   }
 
   .list-header {
